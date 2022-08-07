@@ -1,0 +1,1 @@
+export const eventsPath = process.cwd() + '/data/eventsData.json';

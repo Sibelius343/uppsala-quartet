@@ -11,8 +11,23 @@ const Home: NextPage = () => {
         <title>Uppsala String Quartet</title>
         <meta name='keywords' content='string quartet, classical music' />
       </Head>
-      <Box>
-        <Typography>Uppsala String Quartet</Typography>
+      <Box
+        display='flex'
+        flexDirection='column'
+        justifyContent='start'
+        alignItems='center'
+        width='100vw'
+        height='calc(100vh - 36.5px)'
+        sx={{ backgroundColor: 'lightgrey'}}
+      >
+        <Typography
+          variant='h2'
+          color='#5c5c5c'
+          my={4}
+        >
+          Uppsala String Quartet
+        </Typography>
+        <Image src={'/Uppsala.png'} alt='Uppsala logo' height='500px' width='500px' />
       </Box>
     </>
   )

@@ -13,7 +13,7 @@ const BioCard = ({ name, instrument, bio, picUri }: Performer) => {
         <Typography gutterBottom variant="h5" component="div">
           {name}, {instrument}
         </Typography>
-        <Typography variant="body2" color="text.secondary">
+        <Typography variant="body2" color="text.secondary" whiteSpace='pre-wrap'>
           {bio}
         </Typography>
       </CardContent>

@@ -15,6 +15,12 @@ interface DeleteEventProps {
 }
 
 const DeleteEventDialog = ({ open, handleClose, id, title }: DeleteEventProps) => {
+  const handleDelete = async () => {
+    const response = await fetch(`/api/events/${id}`, { method: 'DELETE' })
+    console.log(response);
+    handleClose();
+  }
+
   return (
     <Dialog
         open={open}
@@ -32,7 +38,7 @@ const DeleteEventDialog = ({ open, handleClose, id, title }: DeleteEventProps) =
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Cancel</Button>
-          <Button onClick={handleClose} autoFocus>
+          <Button onClick={handleDelete} autoFocus>
             Confirm
           </Button>
         </DialogActions>

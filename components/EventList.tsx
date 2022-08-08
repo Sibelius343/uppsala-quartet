@@ -16,7 +16,7 @@ const EventList = ({ events }: EventListProps) => {
           key={id}
         >
           <ListItemButton
-            onClick={() => router.push(`event/${id}`)}
+            onClick={() => router.push(`event-detail/${id}`)}
           >
             <ListItemText
               primary={title}

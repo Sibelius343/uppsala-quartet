@@ -16,8 +16,7 @@ interface DeleteEventProps {
 
 const DeleteEventDialog = ({ open, handleClose, id, title }: DeleteEventProps) => {
   const handleDelete = async () => {
-    const response = await fetch(`/api/events/${id}`, { method: 'DELETE' })
-    console.log(response);
+    const response = await fetch(`/api/events/${id}`, { method: 'DELETE' });
     handleClose();
   }
 

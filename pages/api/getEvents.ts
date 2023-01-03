@@ -1,15 +1,15 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type { NextApiRequest, NextApiResponse } from 'next';
-import { FormValues } from '../../components/ContactForm';
+import { EventObject } from '../../interfaces/events';
 import { readFileSync } from 'fs';
-import { eventsPath } from '../../constants/paths';
+import { EVENTS_PATH } from '../../constants/paths';
 
 export default function handler(
   req: NextApiRequest,
-  res: NextApiResponse<FormValues>
+  res: NextApiResponse<EventObject>
 ) {
   
-  const data: string | undefined = readFileSync(eventsPath, 'utf8');
+  const data: string | undefined = readFileSync(EVENTS_PATH, 'utf8');
 
   const jsonData = data ? JSON.parse(data) : {events: []};
   

@@ -1,24 +1,25 @@
 import { Card, CardMedia, CardContent, Typography } from "@mui/material"
-import { Performer } from "../interfaces/performer";
 
-const BioCard = ({ name, instrument, bio, picUri }: Performer) => {
+interface CardProps {
+  picUri: string,
+  text: string
+}
+
+const AboutQuartetCard = ({ picUri, text }: CardProps) => {
   return (
-    <Card>
+    <Card sx={{ display: 'flex', flexDirection: 'row', mx: 2 }}>
       <CardMedia
         component="img"
         image={picUri}
-        alt={`${name} image`}
+        alt='Quartet pic'
       />
       <CardContent>
-        <Typography gutterBottom variant="h5" component="div">
-          {name}, {instrument}
-        </Typography>
         <Typography variant="body2" color="text.secondary" whiteSpace='pre-wrap'>
-          {bio}
+          {text}
         </Typography>
       </CardContent>
     </Card>
   )
 };
 
-export default BioCard;
+export default AboutQuartetCard;

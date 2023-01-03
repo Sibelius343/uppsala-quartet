@@ -1,29 +1,24 @@
-import { List, ListItem, ListItemButton, ListItemText } from "@mui/material";
-import { PerformanceEvent } from '../models/events';
-import { useRouter } from "next/router";
+import { List } from "@mui/material";
+import EventListItem from "./EventListItem";
+import { PerformanceEvent } from '../interfaces/events';
 
 interface EventListProps {
   events: PerformanceEvent[],
 }
 
 const EventList = ({ events }: EventListProps) => {
-  const router = useRouter();
-
   return (
-    <List>
-      {events.map(({ id, title, date }) => (
-        <ListItem
+    <List sx={{width: '90vw'}}>
+      {events.map(({ id, title, date, location, description, imgUrl }) => (
+        <EventListItem
           key={id}
-        >
-          <ListItemButton
-            onClick={() => router.push(`event-detail/${id}`)}
-          >
-            <ListItemText
-              primary={title}
-              secondary={date}
-            />
-          </ListItemButton>
-        </ListItem>
+          id={id}
+          title={title}
+          date={date}
+          location={location}
+          description={description}
+          imgUrl={imgUrl}
+        />
       ))}
     </List>
   )

@@ -6,7 +6,7 @@ const navStyle: SxProps<Theme> = {
   display: 'flex',
   flexDirection: 'row',
   justifyContent: 'end',
-  alignItems: 'center'
+  alignItems: 'center',
 };
 
 const AdminButton = () => {
@@ -53,7 +53,7 @@ const Navbar = () => {
         <Button>Events</Button>
       </Link>
       <Link href='/contact' passHref>
-        <Button>Contact Us</Button>
+        <Button>Contact</Button>
       </Link>
     </Box>
   )

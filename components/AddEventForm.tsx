@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router';
-import { TextField, Button } from '@mui/material';
-import { Formik, Form, useField, FieldHookConfig, FormikHelpers } from "formik";
-import { NewPerformanceEvent } from '../models/events';
+import { TextField, Button, Box } from '@mui/material';
+import { Formik, Form, useField, FieldHookConfig } from "formik";
+import { NewPerformanceEvent } from '../interfaces/events';
 import { LocalizationProvider, DateTimePicker } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import * as Yup from 'yup';
@@ -40,7 +40,7 @@ const TextInput = ({ label, rows, ...props }: FieldProps) => {
       multiline={Boolean(rows)}
       rows={rows}
       {...field}
-      sx={{ display: 'block' }}
+      sx={{ display: 'block', my: 2 }}
     />
   )
 }
@@ -79,6 +79,7 @@ const AddEventForm = () => {
   const initialValues: NewPerformanceEvent = {
     title: '',
     date: '',
+    location: '',
     description: ''
   }
 
@@ -96,46 +97,53 @@ const AddEventForm = () => {
   };
 
   return (
-    <Formik
-      initialValues={initialValues}
-      onSubmit={handleSubmit}
-      validationSchema={AddEventValidationSchema}
-    >
-      {({ isValid, touched }) => (
-      <Form>
-        <TextInput
-          label='Event Name'
-          name='title'
-          type='text'
-        />
-        <DateInput
-          label='Date and Time'
-          name='date'
-          type='text'
-        />
-        <TextInput
-          label='Description'
-          name='description'
-          type='text'
-          rows={4}
-        />
-        <Button
-          sx={{ mt: 1 }}
-          onClick={handleCancel}
-        >
-          Cancel
-        </Button>
-        <Button
-          variant='contained'
-          type='submit'
-          sx={{ mt: 1 }}
-          disabled={!isValid || !Boolean(touched.title)}
-        >
-          Send
-        </Button>
-      </Form>
-      )}
-    </Formik>
+    <Box sx={{ width: '75%' }}>
+      <Formik
+        initialValues={initialValues}
+        onSubmit={handleSubmit}
+        validationSchema={AddEventValidationSchema}
+      >
+        {({ isValid, touched }) => (
+        <Form>
+          <TextInput
+            label='Event Name'
+            name='title'
+            type='text'
+          />
+          <DateInput
+            label='Date and Time'
+            name='date'
+            type='text'
+          />
+          <TextInput
+            label='Event Location'
+            name='location'
+            type='text'
+          />
+          <TextInput
+            label='Description'
+            name='description'
+            type='text'
+            rows={4}
+          />
+          <Button
+            sx={{ mt: 1 }}
+            onClick={handleCancel}
+          >
+            Cancel
+          </Button>
+          <Button
+            variant='contained'
+            type='submit'
+            sx={{ mt: 1 }}
+            disabled={!isValid || !Boolean(touched.title)}
+          >
+            Create Event
+          </Button>
+        </Form>
+        )}
+      </Formik>
+    </Box>
   )
 };
 

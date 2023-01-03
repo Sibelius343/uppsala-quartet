@@ -1,13 +1,23 @@
 import { TextField, Button } from '@mui/material';
 import { Formik, Form, useField, FieldHookConfig, FormikHelpers } from "formik"
+import useNotificationContext from '../hooks/useNotificationContext';
+import { ContactFormData } from '../interfaces/formData';
+import * as Yup from 'yup';
 
 type FieldProps = { label: string, rows?: number } & FieldHookConfig<string>;
 
-export interface FormValues {
-  name: string,
-  email: string,
-  message: string
-}
+const MessageValidationSchema: Yup.ObjectSchema<any> = Yup.object().shape({
+  name: Yup.string()
+    .min(1, 'Name required')
+    .required('Name required'),
+  email: Yup.string()
+    .matches(/[a-zA-Z]+@[a-zA-Z]+[.][a-zA-Z]+/,
+    'Provide valid email')
+    .required('Email required'),
+  message: Yup.string()
+    .min(5, 'Please provide us with more details')
+    .required('Message required')
+})
 
 const TextInput = ({ label, rows, ...props }: FieldProps) => {
   const [field, meta] = useField<string>(props);
@@ -20,8 +30,9 @@ const TextInput = ({ label, rows, ...props }: FieldProps) => {
       multiline={Boolean(rows)}
       rows={rows}
       error={Boolean(meta.touched && meta.error)}
-      helperText={meta.error}
+      helperText={meta.touched && meta.error}
       fullWidth
+      required
       {...field}
       sx={{ display: 'block' }}
     />
@@ -29,20 +40,26 @@ const TextInput = ({ label, rows, ...props }: FieldProps) => {
 }
 
 const ContactForm = () => {
-  const initialValues: FormValues = {
+  const { setNotificationMessage } = useNotificationContext();
+
+  const initialValues: ContactFormData = {
     name: '',
     email: '',
     message: ''
   }
 
-  const handleSubmit = async (values: FormValues, helpers: FormikHelpers<FormValues>) => {
+  const handleSubmit = async (values: ContactFormData, helpers: FormikHelpers<ContactFormData>) => {
     const response = await fetch('api/mail', {
       method: 'post',
       body: JSON.stringify(values)
     });
     
-    const data = await response.json();
-    console.log(data);
+    try {
+      await response.json();
+      setNotificationMessage('Message sent successfully!');
+    } catch (e) {
+      setNotificationMessage('Error sending message');
+    }
     helpers.resetForm();
   }
 
@@ -50,8 +67,12 @@ const ContactForm = () => {
     <Formik
       initialValues={initialValues}
       onSubmit={handleSubmit}
+      validationSchema={MessageValidationSchema}
     >
-      <Form >
+      {({ isValid, dirty }) => (
+      <Form
+        style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}
+      >
         <TextInput
           label='Name'
           name='name'
@@ -71,11 +92,13 @@ const ContactForm = () => {
         <Button
           variant='contained'
           type='submit'
-          sx={{ mt: 1 }}
+          sx={{ mt: 1, display: 'flex', alignSelf: 'start' }}
+          disabled={!(isValid && dirty)}
         >
           Send
         </Button>
       </Form>
+      )}
     </Formik>
   )
 };

@@ -1,5 +1,6 @@
 import { Box, SxProps, Theme } from '@mui/material';
 import Navbar from './Navbar';
+import NotificationSnackbar from './NotificationSnackbar';
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -19,6 +20,7 @@ const Layout = ({ children }: LayoutProps) => {
       <Box sx={layoutStyle}>
         {children}
       </Box>
+      <NotificationSnackbar />
     </>
   )
 };

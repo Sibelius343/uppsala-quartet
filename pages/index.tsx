@@ -8,7 +8,7 @@ const Home: NextPage = () => {
   return (
     <>
       <Head>
-        <title>Uppsala String Quartet</title>
+        <title>Catena String Quartet</title>
         <meta name='keywords' content='string quartet, classical music' />
       </Head>
       <Box
@@ -17,7 +17,7 @@ const Home: NextPage = () => {
         justifyContent='start'
         alignItems='center'
         width='100vw'
-        height='calc(100vh - 36.5px)'
+        minHeight='calc(100vh - 36.5px)'
         sx={{ backgroundColor: 'lightgrey'}}
       >
         <Typography
@@ -25,7 +25,7 @@ const Home: NextPage = () => {
           color='#5c5c5c'
           my={4}
         >
-          Uppsala String Quartet
+          Catena String Quartet
         </Typography>
         <Image src={'/Uppsala.png'} alt='Uppsala logo' height='500px' width='500px' />
       </Box>

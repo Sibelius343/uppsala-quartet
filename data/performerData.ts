@@ -1,4 +1,4 @@
-import { Performer } from "../models/performer";
+import { Performer } from "../interfaces/performer";
 
 export const performerData: Performer[] = [
   {
@@ -26,7 +26,7 @@ export const performerData: Performer[] = [
     id: 4,
     name: 'Avery Johnson',
     instrument: 'Cello',
-    bio: 'Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum',
-    picUri: '/20190207_104400-01.jpeg'
+    bio: 'Avery Johnson is a cellist, audio engineer, music producer and instructor based in Minneapolis, MN. He has been playing the cello for 24 years, having studied with Brenda Villard (Founder of the Villard Cello Studio), Judith Glyde (founding member of the Manhattan String Quartet, cello professor at CU Boulder), Thomas Heinrich (Cellist in the Colorado Symphony) and David Requiro (Professor at CU Boulder, first prize winner of the 2008 Naumburg International Violoncello Competition). While in university, he studied audio engineering and producing with his father and uncle on the side, both experienced engineers.\n\nAfter earning his BA in Cello Performance in 2017 at the University of Colorado at Boulder, he worked with Stone Cottage Studios as their head audio engineer in Boulder CO. While there he helped to produce the Stone Cottage Artist Sessions and Stone Cottage branded livestream shows. He has a love of songwriting/arrangement, and the creative ways that it relates to the recording process. His most recent project was co producing the record “Mother Medicine” with Colorado based artist Sara Emmitt (available on all streaming platforms), where he arranged an array of cello and various instrumental lines into the songs. When not playing music, he enjoys Lindy Hop and Charleston swing dance, cabin activities and cooking.',
+    picUri: '/avery-johnson-headshot.png'
   }
 ]

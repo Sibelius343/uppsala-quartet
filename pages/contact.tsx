@@ -11,7 +11,7 @@ const Contact: NextPage = () => {
     </Head>
       <Box sx={{display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
         <Typography variant="h2">Contact Us</Typography>
-        <Paper sx={{ width: '400px', padding: 2 }}>
+        <Paper sx={{ width: '40vw', padding: 2 }}>
           <ContactForm />
         </Paper>
       </Box>

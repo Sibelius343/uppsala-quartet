@@ -4,9 +4,9 @@ import { PerformanceEvent } from "../interfaces/events";
 import { useRouter } from "next/router";
 import { DEFAULT_EVENT_IMAGE_PATH } from "../constants/paths";
 import dayjs from "dayjs";
+import advancedFormat from "dayjs/plugin/advancedFormat";
 
-const advancedFormat = require('dayjs/plugin/advancedFormat')
-dayjs.extend(advancedFormat)
+dayjs.extend(advancedFormat);
 
 interface ItemDescription {
   date?: string,

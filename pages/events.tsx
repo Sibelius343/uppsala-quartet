@@ -5,7 +5,7 @@ import { Button, Typography } from "@mui/material";
 import EventList from "../components/EventList";
 import { EventObject } from "../interfaces/events";
 import useAdminContext from "../hooks/useAdminContext";
-import { BASE_API_URL } from "../config";
+import { loadEvents } from "../lib/loadEvents";
 
 const Events: NextPage<EventObject> = ({ events }) => {
   const { isAdmin } = useAdminContext();
@@ -29,10 +29,7 @@ const Events: NextPage<EventObject> = ({ events }) => {
 export default Events;
 
 export const getStaticProps: GetStaticProps = async () => {
-  const response = await fetch(`${BASE_API_URL}/api/events`);
-  console.log(response);
-  
-  const { events }: EventObject = await response.json();
+  const events = await loadEvents();
 
   return {
     props: {

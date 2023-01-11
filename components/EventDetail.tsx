@@ -4,8 +4,11 @@ import useAdminContext from "../hooks/useAdminContext"
 import { PerformanceEvent } from "../interfaces/events"
 import DeleteEventDialog from "./DeleteEventDialog";
 import dayjs from "dayjs";
+import advancedFormat from "dayjs/plugin/advancedFormat";
 import { DEFAULT_EVENT_IMAGE_PATH } from "../constants/paths";
 import { useRouter } from "next/router";
+
+dayjs.extend(advancedFormat);
 
 const EventDetail = ({ id, title, date, location, description, imgUrl } : PerformanceEvent ) => {
   const { isAdmin } = useAdminContext();
@@ -21,7 +24,11 @@ const EventDetail = ({ id, title, date, location, description, imgUrl } : Perfor
   const src = imgUrl ? imgUrl : DEFAULT_EVENT_IMAGE_PATH;
 
   const locationUrl = location ? `http://maps.google.com/?q=${location}` : '';
-  const formattedDate = dayjs(date).format('h:mm A [on] dddd, MMMM Do, YYYY')
+  console.log(date);
+  
+  const formattedDate = dayjs(date).format('h:mm A [on] dddd, MMMM Do, YYYY');
+  console.log(formattedDate);
+  
 
   return (
     <Card sx={{ width: '90%', display: 'flex', flexDirection: 'row' }}>

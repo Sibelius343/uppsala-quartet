@@ -1,8 +1,6 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type { NextApiRequest, NextApiResponse } from 'next';
-import { readFileSync, writeFileSync } from 'fs';
-import { EVENTS_PATH } from '../../../constants/paths';
-import { EventObject, PerformanceEvent } from '../../../interfaces/events';
+import { PerformanceEvent } from '../../../interfaces/events';
 import event from '../../../models/event';
 
 export default async function handler(

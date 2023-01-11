@@ -11,7 +11,7 @@ const MessageValidationSchema: Yup.ObjectSchema<any> = Yup.object().shape({
     .min(1, 'Name required')
     .required('Name required'),
   email: Yup.string()
-    .matches(/[a-zA-Z]+@[a-zA-Z]+[.][a-zA-Z]+/,
+    .matches(/[a-zA-Z0-9]+@[a-zA-Z0-9]+[.][a-zA-Z]+/,
     'Provide valid email')
     .required('Email required'),
   message: Yup.string()

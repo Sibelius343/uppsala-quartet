@@ -10,7 +10,6 @@ export default async function handler(
   switch (req.method) {
     case 'GET':
       const response = await event.findById(req.query.id);
-
       if (response) {
         const eventDetails = response.toJSON();
         res.status(200).json(eventDetails);

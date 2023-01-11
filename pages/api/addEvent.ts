@@ -4,6 +4,7 @@ import { NewPerformanceEvent } from '../../interfaces/events';
 import nextConnect from 'next-connect';
 import multer from 'multer';
 import event from '../../models/event';
+import dbConnect from '../../utils/dbConnect';
 
 const upload = multer({ dest: 'event-images/' });
 
@@ -23,6 +24,7 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<FormValues>
 ) {
+  await dbConnect();
   const newData: NewPerformanceEvent = JSON.parse(req.body);
 
   const newEvent = new event({

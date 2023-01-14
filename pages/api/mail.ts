@@ -4,7 +4,7 @@ import mail from '@sendgrid/mail';
 import { ContactFormData } from '../../interfaces/formData';
 
 const SENDGRID_API_KEY = process.env.SENDGRID_API_KEY as string;
-const CATENA_GMAIL_ACCOUNT = process.env.CATENA_GMAIL_ACCOUNT as string;
+const CATENA_EMAIL_ACCOUNT = process.env.CATENA_EMAIL_ACCOUNT as string;
 
 mail.setApiKey(SENDGRID_API_KEY);
 
@@ -21,7 +21,7 @@ export default async function handler(
   `;
 
   const data: mail.MailDataRequired = {
-    to: CATENA_GMAIL_ACCOUNT,
+    to: CATENA_EMAIL_ACCOUNT,
     from: 'contact@catenastringquartet.com',
     subject: `New Contact Form Message from ${body.name}`,
     text: message,

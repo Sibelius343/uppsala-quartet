@@ -41,11 +41,13 @@ export const getStaticProps: GetStaticProps = async (context) => {
         location: location ? location : null,
         description: description ? description : null,
         imgUrl: imgUrl ? imgUrl : null
-      }
+      },
+      revalidate: 10
     }
   } else {
     return {
-      props: {}
+      props: {},
+      revalidate: 10
     }
   }
 }

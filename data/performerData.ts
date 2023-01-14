@@ -5,15 +5,27 @@ export const performerData: Performer[] = [
     id: 1,
     name: 'Sam Schoenwald',
     instrument: 'Violin',
-    bio: 'Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum',
+    bio: `Sam Schoenwald is a classically-trained violinist who has performed professionally in solo, chamber music, and symphony orchestras since he was 15 years old. He performed daily as a member of a piano quintet during an adventurous four-month performance contract with Lincoln Center Stage aboard a Holland America cruise ship tour of Asia and Alaska. As the recipient of an Emerging Artist Fellowship at the Atlantic Music Festival in Maine, he performed solo violin and chamber music works of contemporary composers, including Robert Paterson. As a student, he played in masterclasses led by esteemed performers, including Midori, Yair Kless, and the Telegraph Quartet. He was coached in chamber music performance by Mack McCray, Tanya Reminkova, Käthe Jarka, Bruce Coppock, and the Parker Quartet. Summer festival highlights included fellowships in Mendocino and the National Repertory Orchestra in Breckenridge, Colorado.
+
+    Three years ago, as he was establishing a freelance teaching and performing career in Chicago, the COVID pandemic hit. During the months that followed, Sam decided to pursue another of his passions – computer programming. He educated himself in computer science fundamentals, algorithms, and several computer programming languages with the intent to develop a dual career in software development and music. Following a six-month engineering internship at Datasite, headquartered in Minneapolis, he is now a full-time Software Engineer there.
+    
+    It may seem like the fields of music performance and software engineering are quite different, but Sam has found that his training as a classical musician has made him  uniquely suited to the abstract systems of engineering: “Musicians break a musical challenge into small, fundamental pieces while also considering its place in the larger context of the music. And because music performance is almost always a collaborative process, musicians become skilled at working things out together -- from the notation of the musical language, to the understanding of musical structure. This has a lot to do with my love of programming: problem-solving on a whole new level.”
+    
+    Sam earned his Bachelor’s degree at the University of Minnesota, studying under Sally O’Reilly. He then moved to San Francisco to study with Wei He at the San Francisco Conservatory of Music, where he completed his Master's degree in 2016. He continues to sub with the Fargo-Moorhead Symphony when his schedule allows. He was a roster member of the first violin section of the Fargo-Moorhead Symphony following a successful audition as a high school sophomore, and served briefly as the Assistant-Concertmaster of the Fargo-Moorhead Symphony Orchestra before accepting the cruise ship position.`,
     picUri: '/sam-schoenwald-headshot.jpg'
   },
   {
     id: 2,
     name: 'Mike Miller',
     instrument: 'Violin',
-    bio: 'Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum',
-    picUri: '/20190207_104400-01.jpeg'
+    bio: `Mike Miller has always felt inspired to teach and perform. These passions have combined perfectly through the violin. Currently, Miller performs as Concertmaster of SCVSO under the direction of Kris Tjornehoj and as a member of the Catena String Quartet.
+    
+    Having received a Master’s in Violin Performance and Pedagogy at the University of Colorado Boulder, studying under Professor Harumi Rhodes, Miller is excited to bring his love of music back to Minnesota. His undergraduate studies took place at Concordia College in Moorhead, Minnesota, where Miller studied with Dr. Sonja Harasim. During this time, Miller became deeply involved in the music making of the Fargo-Moorhead Community through both performance and education.
+    
+    He has appeared as a substitute in the Fargo-Moorhead Symphony for three years and is a founding member of the Campanile String Quartet. Miller has also taught at the Trollwood Performing Arts school for two years, was one of the first teachers involved with the Concordia String Preparatory program, taught as a string mentor for the North Star Chamber Music Festival’s first year, and has led his private students to winning local competitions and obtaining scholarships to their dream schools. In Colorado, Mr. Miller performed as a violinist in the Campanile String Quartet, Boulder Symphony, Longmont Symphony Orchestra, and has participated in the Crested Butte Music Festival for two years.
+    
+    Miller is excited to continue to share his love of music in the Twin Cities.`,
+    picUri: '/mike-miller-headshot.jpg'
   },
   {
     id: 3,
@@ -30,3 +42,5 @@ export const performerData: Performer[] = [
     picUri: '/avery-johnson-headshot.png'
   }
 ]
+
+export const quartetBio = 'Catena String Quartet is a Minneapolis-based string quartet.'

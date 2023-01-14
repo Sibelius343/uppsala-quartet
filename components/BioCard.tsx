@@ -8,12 +8,13 @@ const BioCard = ({ name, instrument, bio, picUri }: Performer) => {
         component="img"
         image={picUri}
         alt={`${name} image`}
+        sx={{ maxHeight: '750px', objectPosition: 'top' }}
       />
       <CardContent>
         <Typography gutterBottom variant="h5" component="div">
           {name}, {instrument}
         </Typography>
-        <Typography variant="body2" color="text.secondary" whiteSpace='pre-wrap'>
+        <Typography variant="body2" color="text.secondary" whiteSpace='pre-line'>
           {bio}
         </Typography>
       </CardContent>

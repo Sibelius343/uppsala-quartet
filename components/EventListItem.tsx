@@ -45,11 +45,11 @@ const EventListItem = ({ id, title, date, location, description, imgUrl }: Perfo
 
   const formattedDate = dayjs(date).format('h:mm A [on] dddd, MMMM Do, YYYY');
   
-
   return (
     <ListItem>
       <ListItemButton
         onClick={() => router.push(`event/${id}`)}
+        sx={{ flexDirection: { xs: 'column', sm: 'row' } }}
       >
         <Box flexShrink={0}>
           <Image

@@ -5,44 +5,17 @@ import useAdminContext from "../hooks/useAdminContext";
 const navStyle: SxProps<Theme> = {
   display: 'flex',
   flexDirection: 'row',
-  justifyContent: 'end',
+  justifyContent: 'center',
   alignItems: 'center',
+  gap: 6,
+  backgroundColor: '#f0f0f0'
 };
 
-const AdminButton = () => {
-  const { isAdmin, setIsAdmin } = useAdminContext();
 
-  const adminButtonStyle: SxProps<Theme> = {
-    cursor: isAdmin ? 'pointer' : 'default', 
-    ":hover": { backgroundColor: 'white' } ,
-    alignSelf: 'stretch'
-  }
-
-  const adminClick = (e: React.MouseEvent<HTMLButtonElement>) => {
-    if ( isAdmin ) { 
-      setIsAdmin(false);
-      return;
-    }
-    if (e.detail === 3) setIsAdmin(true);
-  }
-
-  return (
-    <Button
-      color={isAdmin ? 'error': 'primary'}
-      onClick={adminClick}
-      disableRipple
-      sx={adminButtonStyle}
-    >
-      {isAdmin ? 'Admin' : ''}
-    </Button>
-  )
-}
 
 const Navbar = () => {
   return (
     <Box sx={navStyle}>
-      <AdminButton />
-      <div style={{ display: 'flex', flex: 1 }}></div>
       <Link href='/' passHref>
         <Button>Home</Button>
       </Link>

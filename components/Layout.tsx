@@ -1,4 +1,5 @@
 import { Box, SxProps, Theme } from '@mui/material';
+import AdminButton from './AdminButton';
 import Navbar from './Navbar';
 import NotificationSnackbar from './NotificationSnackbar';
 
@@ -20,6 +21,7 @@ const Layout = ({ children }: LayoutProps) => {
       <Box sx={layoutStyle}>
         {children}
       </Box>
+      <AdminButton />
       <NotificationSnackbar />
     </>
   )

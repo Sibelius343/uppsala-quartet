@@ -31,7 +31,7 @@ const EventDetail = ({ id, title, date, location, description, imgUrl } : Perfor
   
 
   return (
-    <Card sx={{ width: '90%', display: 'flex', flexDirection: 'row' }}>
+    <Card sx={{ width: '90%', display: 'flex', flexDirection: { xs: 'column', sm: 'row' } }}>
       <CardMedia
         component="img"
         image={src}

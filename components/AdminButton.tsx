@@ -8,7 +8,7 @@ const AdminButton = () => {
     cursor: isAdmin ? 'pointer' : 'default', 
     ":hover": { backgroundColor: 'rgb(0,0,0,0)' },
     position: 'absolute',
-    bottom: 0,
+    top: '37px',
     left: 0,
     height: '40px'
   }

@@ -1,6 +1,11 @@
 import { createContext } from "react";
 
-const AdminContext = createContext({
+interface AdminContext {
+  isAdmin: boolean | undefined;
+  setIsAdmin: (value: boolean) => void;
+}
+
+const AdminContext = createContext<AdminContext>({
   isAdmin: false,
   setIsAdmin: (value: boolean) => {}
 });

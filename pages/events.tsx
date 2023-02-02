@@ -6,9 +6,15 @@ import EventList from "../components/EventList";
 import { EventObject } from "../interfaces/events";
 import useAdminContext from "../hooks/useAdminContext";
 import { loadEvents } from "../lib/loadEvents";
+import { useEffect, useState } from "react";
 
 const Events: NextPage<EventObject> = ({ events }) => {
   const { isAdmin } = useAdminContext();
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true)
+  }, [])
 
   return (
     <>
@@ -19,7 +25,7 @@ const Events: NextPage<EventObject> = ({ events }) => {
       <EventList
         events={events}
       />
-      {isAdmin && <Link href='/addEvent' passHref>
+      {mounted && isAdmin && <Link href='/addEvent' passHref>
         <Button>Add Event</Button>
       </Link>}
     </>

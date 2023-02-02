@@ -1,5 +1,5 @@
 import { Box, SxProps, Theme } from '@mui/material';
-import AdminButton from './AdminButton';
+import Footer from './Footer';
 import Navbar from './Navbar';
 import NotificationSnackbar from './NotificationSnackbar';
 
@@ -11,7 +11,8 @@ const layoutStyle: SxProps<Theme> = {
   display: 'flex',
   flexDirection: 'column',
   justifyContent: 'center',
-  alignItems: 'center'
+  alignItems: 'center',
+  minHeight: 'calc(100vh - 36.5px)'
 }
 
 const Layout = ({ children }: LayoutProps) => {
@@ -21,7 +22,7 @@ const Layout = ({ children }: LayoutProps) => {
       <Box sx={layoutStyle}>
         {children}
       </Box>
-      <AdminButton />
+      <Footer />
       <NotificationSnackbar />
     </>
   )

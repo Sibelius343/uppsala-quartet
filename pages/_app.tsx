@@ -6,9 +6,11 @@ import { useState } from 'react'
 import { LocalizationProvider } from '@mui/x-date-pickers'
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import NotificationContext from '../context/NotificationContext'
+import useLocalStorage from '../hooks/useLocalStorage'
 
 function MyApp({ Component, pageProps }: AppProps) {
-  const [isAdmin, setIsAdmin] = useState(false);
+  const [localValue] = useLocalStorage('catena_admin', false);
+  const [isAdmin, setIsAdmin] = useState(localValue);
   const [notificationMessage, setNotificationMessage] = useState('');
 
   return (

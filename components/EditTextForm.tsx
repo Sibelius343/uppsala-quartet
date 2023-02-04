@@ -41,10 +41,10 @@ const EditTextForm = ({ itemId, itemTitle, itemText, itemType, handleClose }: Ed
           text
         })
       });
-      setNotificationMessage('Bio updated successfully.')
+      setNotificationMessage('Text updated successfully.')
       handleClose();
     } catch(e) {
-      setNotificationMessage('Error updating bio.')
+      setNotificationMessage('Error updating text.')
     }
   };
 

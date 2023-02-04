@@ -1,5 +1,5 @@
 export interface PerformanceEvent {
-  id: number,
+  id: string,
   title: string,
   date?: string,
   location?: string,

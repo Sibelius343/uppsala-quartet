@@ -10,7 +10,7 @@ import {
 interface DeleteEventProps {
   open: boolean,
   handleClose: () => void,
-  id: number,
+  id: string,
   title: string
 }
 

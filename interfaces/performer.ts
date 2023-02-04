@@ -1,7 +1,11 @@
 export interface Performer {
-  id: number;
+  id: string;
   name: string;
   instrument: string;
   bio: string;
   picUri: string;
+}
+
+export interface PerformerObject {
+  performers: Performer[];
 }

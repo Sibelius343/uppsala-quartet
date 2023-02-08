@@ -2,11 +2,13 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { PerformanceEvent } from '../../../interfaces/events';
 import event from '../../../models/event';
+import dbConnect from '../../../utils/dbConnect';
 
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<PerformanceEvent | string>
 ) {
+  await dbConnect();
   switch (req.method) {
     case 'GET':
       const response = await event.findById(req.query.id);

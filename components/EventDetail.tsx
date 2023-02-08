@@ -1,5 +1,5 @@
 import { Card, CardContent, Typography, Button, Link, CardMedia, Box } from "@mui/material";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import useAdminContext from "../hooks/useAdminContext"
 import { PerformanceEvent } from "../interfaces/events"
 import DeleteEventDialog from "./DeleteEventDialog";
@@ -11,9 +11,14 @@ import { useRouter } from "next/router";
 dayjs.extend(advancedFormat);
 
 const EventDetail = ({ id, title, date, location, description, imgUrl } : PerformanceEvent ) => {
+  const [isMounted, setIsMounted] = useState(false);
   const { isAdmin } = useAdminContext();
   const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
   const router = useRouter();
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, [])
 
   const handleDialogOpen = () => setDeleteDialogOpen(true);
   const handleDialogClose = () => {
@@ -24,11 +29,8 @@ const EventDetail = ({ id, title, date, location, description, imgUrl } : Perfor
   const src = imgUrl ? imgUrl : DEFAULT_EVENT_IMAGE_PATH;
 
   const locationUrl = location ? `http://maps.google.com/?q=${location}` : '';
-  console.log(date);
   
   const formattedDate = dayjs(date).format('h:mm A [on] dddd, MMMM Do, YYYY');
-  console.log(formattedDate);
-  
 
   return (
     <Card sx={{ width: '90%', display: 'flex', flexDirection: { xs: 'column', sm: 'row' } }}>
@@ -53,7 +55,7 @@ const EventDetail = ({ id, title, date, location, description, imgUrl } : Perfor
           {description}
         </Typography>
         </Box>
-        {isAdmin && <Button onClick={handleDialogOpen} sx={{ alignSelf: 'end' }}>Delete</Button>}
+        {(isMounted && isAdmin) && <Button onClick={handleDialogOpen} sx={{ alignSelf: 'end' }}>Delete</Button>}
       </CardContent>
       <DeleteEventDialog
         open={deleteDialogOpen}

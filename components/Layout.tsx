@@ -10,9 +10,10 @@ interface LayoutProps {
 const layoutStyle: SxProps<Theme> = {
   display: 'flex',
   flexDirection: 'column',
-  justifyContent: 'center',
+  justifyContent: 'start',
   alignItems: 'center',
-  minHeight: 'calc(100vh - 36.5px)'
+  minHeight: 'calc(100vh - 36.5px)',
+  pt: 2
 }
 
 const Layout = ({ children }: LayoutProps) => {

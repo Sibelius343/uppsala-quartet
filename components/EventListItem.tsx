@@ -54,8 +54,8 @@ const EventListItem = ({ id, title, date, location, description, imgUrl }: Perfo
         <Box flexShrink={0}>
           <Image
             src={src}
-            width={150}
-            height={150}
+            width={175}
+            height={175}
             objectFit="none"
             alt={`${title} image`}
           />

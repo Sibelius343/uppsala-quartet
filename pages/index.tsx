@@ -27,7 +27,7 @@ const Home: NextPage = () => {
         >
           Catena String Quartet
         </Typography>
-        <Image src={'/Uppsala.png'} alt='Uppsala logo' height='500px' width='500px' />
+        <Image src={'/catena-logo.jpg'} alt='Uppsala logo' height='500px' width='500px' />
       </Box>
     </>
   )

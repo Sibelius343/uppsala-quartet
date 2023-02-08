@@ -1,10 +1,16 @@
 import { useRouter } from 'next/router';
-import { TextField, Button, Box } from '@mui/material';
+import { TextField, Button, Box, Typography, Dialog, DialogTitle, DialogContent } from '@mui/material';
 import { Formik, Form, useField, FieldHookConfig } from "formik";
 import { NewPerformanceEvent } from '../interfaces/events';
 import { LocalizationProvider, DateTimePicker } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import * as Yup from 'yup';
+import { useState } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faImage } from '@fortawesome/free-regular-svg-icons';
+import Image from 'next/image';
+import ImagePicker from './ImagePicker';
+import { UnsplashImage } from '../interfaces/images';
 
 type FieldProps = { label: string, rows?: number } & FieldHookConfig<string>;
 
@@ -74,6 +80,11 @@ const DateInput = ({ label, rows, ...props}: FieldProps) => {
 }
 
 const AddEventForm = () => {
+  const [searchValue, setSearchValue] = useState('');
+  const [photoQuery, setPhotoQuery] = useState('');
+  const [selectedPhoto, setSelectedPhoto] = useState<UnsplashImage>();
+  const [isOpen, setIsOpen] = useState(false);
+  const [page, setPage] = useState(1);
   const router = useRouter();
 
   const initialValues: NewPerformanceEvent = {
@@ -83,10 +94,17 @@ const AddEventForm = () => {
     description: ''
   }
 
+  const handleImageFormSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
+    event.preventDefault();
+    setPhotoQuery(searchValue);
+  }
+
   const handleSubmit = async (values: NewPerformanceEvent) => {
+    const newEvent: NewPerformanceEvent = { ...values, imgUrl: selectedPhoto?.urls.small || '' };
+
     await fetch('api/addEvent', {
       method: 'post',
-      body: JSON.stringify(values)
+      body: JSON.stringify(newEvent)
     });
     
     router.push('/events');
@@ -126,23 +144,64 @@ const AddEventForm = () => {
             type='text'
             rows={4}
           />
-          <Button
-            sx={{ mt: 1 }}
-            onClick={handleCancel}
-          >
-            Cancel
-          </Button>
-          <Button
-            variant='contained'
-            type='submit'
-            sx={{ mt: 1 }}
-            disabled={!isValid || !Boolean(touched.title)}
-          >
-            Create Event
-          </Button>
+          <Box sx={{ display: 'flex', gap: 2 }} >
+            {selectedPhoto ?
+            <Image src={selectedPhoto.urls.small} alt={'Event Image'} width={150} height={150} objectFit='cover' /> :
+            <FontAwesomeIcon icon={faImage} size="10x" color='#d4d4d4' />}
+            <Box sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', gap: 2 }} >
+
+              <Button
+                variant='contained'
+                onClick={() => setIsOpen(true)}
+              >
+                Add Photo
+              </Button>
+            </Box>
+          </Box>
+          <Box>
+            <Button
+              sx={{ mt: 1 }}
+              onClick={handleCancel}
+            >
+              Cancel
+            </Button>
+            <Button
+              variant='contained'
+              type='submit'
+              sx={{ mt: 1 }}
+              disabled={!isValid || !Boolean(touched.title)}
+            >
+              Create Event
+            </Button>
+          </Box>
         </Form>
         )}
       </Formik>
+      <Dialog open={isOpen} onClose={() => setIsOpen(false)}>
+        <DialogTitle variant='h5'>Search Image</DialogTitle>
+        <DialogContent>
+          <Box
+            component='form'
+            onSubmit={handleImageFormSearch}
+          >
+            <TextField
+              value={searchValue}
+              onChange={(e) => setSearchValue(e.target.value)}
+              fullWidth
+            />
+            <Button type='submit'>Search</Button>
+          </Box>
+          {photoQuery &&
+          <ImagePicker
+            query={photoQuery}
+            selectedImage={selectedPhoto}
+            setSelectedImage={setSelectedPhoto}
+            page={page}
+            setPage={setPage}
+            handleClose={() => setIsOpen(false)}
+          />}
+        </DialogContent>
+      </Dialog>
     </Box>
   )
 };

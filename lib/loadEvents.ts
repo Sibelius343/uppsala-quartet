@@ -22,6 +22,7 @@ export const loadSingleEvent = async (id: any) => {
       const response = await event.findById(id);
       return response?.toJSON();
     } catch (e) {
+      console.error(e)
       return null;
     }
   } else {

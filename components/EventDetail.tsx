@@ -38,7 +38,7 @@ const EventDetail = ({ id, title, date, location, description, imgUrl } : Perfor
         component="img"
         image={src}
         alt='Quartet pic'
-        sx={{width: '33%'}}
+        sx={{width: { xs: '100%', sm: '33%' }}}
       />
       <CardContent sx={{ display: 'flex', flexDirection: 'column', flexGrow: 1, justifyContent: 'space-between'}}>
         <Box>

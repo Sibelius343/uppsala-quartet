@@ -1,27 +1,12 @@
 import { GetStaticPaths, GetStaticProps, NextPage } from "next";
 import Head from "next/head";
-import { Typography, Button, Box, CircularProgress } from "@mui/material";
+import { Typography, Button } from "@mui/material";
 import { PerformanceEvent } from "../../../interfaces/events";
 import EventDetail from "../../../components/EventDetail";
 import Link from "next/link";
-import { useRouter } from "next/router";
 import { loadEvents, loadSingleEvent } from "../../../lib/loadEvents";
 
 const Event: NextPage<PerformanceEvent> = ({ id, title, date, location, description, imgUrl }) => {
-  const router = useRouter();
-
-  if (router.isFallback) {
-    return (
-      <Box
-        display='flex'
-        justifyContent='center'
-        alignItems='center'
-      >
-        <CircularProgress />
-      </Box>
-    )
-  }
-
   return (
     <>
       <Head>
@@ -73,7 +58,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
   
   return {
     paths,
-    fallback: true
+    fallback: 'blocking'
   }
 }
 

@@ -7,9 +7,14 @@ interface EventListProps {
 }
 
 const EventList = ({ events }: EventListProps) => {
+  const sortedEvents = events.sort((a, b) => {
+    if ((a.date || "0") < (b.date || "0")) return 1;
+    return -1
+  })
+
   return (
     <List sx={{width: '90vw'}}>
-      {events.map(({ id, title, date, location, description, imgUrl }, i) => (
+      {sortedEvents.map(({ id, title, date, location, description, imgUrl }, i) => (
         <Box key={id}>
           <EventListItem
             id={id}

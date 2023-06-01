@@ -9,6 +9,7 @@ const Home: NextPage = () => {
     <>
       <Head>
         <title>Catena String Quartet</title>
+        <meta property='description' content='The Catena String Quartet formed in 2022 and is based in Minneapolis, Minnesota. All dedicated musicians from an early age, they hold a particular love for chamber music. ' />
         <meta name='keywords' content='string quartet, classical music' />
       </Head>
       <Box

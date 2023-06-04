@@ -6,12 +6,14 @@ import * as Yup from 'yup';
 
 type FieldProps = { label: string, rows?: number } & FieldHookConfig<string>;
 
+const emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/
+
 const MessageValidationSchema: Yup.ObjectSchema<any> = Yup.object().shape({
   name: Yup.string()
     .min(1, 'Name required')
     .required('Name required'),
   email: Yup.string()
-    .matches(/[a-zA-Z0-9]+@[a-zA-Z0-9]+[.][a-zA-Z]+/,
+    .matches(emailRegex,
     'Provide valid email')
     .required('Email required'),
   message: Yup.string()

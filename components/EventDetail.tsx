@@ -49,7 +49,7 @@ const EventDetail = ({ id, title, date, location, description, imgUrl } : Perfor
           {formattedDate}
         </Typography>}
         {location && <span>at <Link href={locationUrl} target='_blank' underline='hover'>
-        {location}`
+        {location}
         </Link></span>}
         <Typography mt={2} variant="body2" color="text.secondary">
           {description}

@@ -50,13 +50,12 @@ const ContactForm = () => {
     message: ''
   }
 
-  const handleSubmit = async (values: ContactFormData, helpers: FormikHelpers<ContactFormData>) => {
-    const response = await fetch('api/mail', {
-      method: 'post',
-      body: JSON.stringify(values)
-    });
-    
+  const handleSubmit = async (values: ContactFormData, helpers: FormikHelpers<ContactFormData>) => {   
     try {
+      const response = await fetch('api/mail', {
+        method: 'post',
+        body: JSON.stringify(values)
+      });
       await response.json();
       setNotificationMessage('Message sent successfully!');
     } catch (e) {

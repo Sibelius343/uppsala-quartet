@@ -15,6 +15,10 @@
     "jsx": "preserve",
     "incremental": true
   },
+  "typeRoots": [
+    "node_modules/@types"
+  ],
+  "types": [ "youtube" ],
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "pages/event-detail"],
   "exclude": ["node_modules"]
 }

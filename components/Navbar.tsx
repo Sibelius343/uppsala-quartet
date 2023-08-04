@@ -24,6 +24,9 @@ const Navbar = () => {
       <Link href='/events' passHref>
         <Button>Events</Button>
       </Link>
+      <Link href='/media' passHref>
+        <Button>Media</Button>
+      </Link>
       <Link href='/contact' passHref>
         <Button>Contact</Button>
       </Link>

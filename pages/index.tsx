@@ -26,16 +26,9 @@ const Home: NextPage = () => {
         minHeight='calc(100vh - 94.75px)'
         sx={{ backgroundColor: 'lightgrey', mt: -2 }}
       >
-        <Image src={smallScreen ? "/catena-mobile-background.jpg" : "/quartet-collage.jpg"} alt='Catena background' layout='fill' objectFit='cover' />
-        {/* <Typography
-          variant='h2'
-          color={theme.palette.grey[200]}
-          my={4}
-          textAlign='center'
-          zIndex={1}
-        >
-          Catena String Quartet
-        </Typography> */}
+        <Box position="fixed" width="100vw" height="100vh">
+          <Image src={smallScreen ? "/catena-mobile-background.jpg" : "/quartet-collage.jpg"} alt='Catena background' layout='fill' objectFit='cover' />
+        </Box>
         <Image src={'/catena-logo.png'} alt='Catena logo' height={logoDimension} width={logoDimension} style={{ borderRadius: 10 }} />
       </Box>
     </>

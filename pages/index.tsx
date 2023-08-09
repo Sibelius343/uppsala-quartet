@@ -2,9 +2,14 @@ import type { NextPage } from 'next';
 import Head from 'next/head';
 import Image from 'next/image';
 import styles from '../styles/Home.module.css';
-import { Box, Typography } from '@mui/material';
+import { Box, Typography, useMediaQuery, useTheme } from '@mui/material';
 
 const Home: NextPage = () => {
+  const theme = useTheme()
+  const smallScreen = useMediaQuery(theme.breakpoints.down('md'));
+
+  const logoDimension = "250px";
+
   return (
     <>
       <Head>
@@ -15,21 +20,23 @@ const Home: NextPage = () => {
       <Box
         display='flex'
         flexDirection='column'
-        justifyContent='start'
+        justifyContent={"center"}
         alignItems='center'
         width='100vw'
         minHeight='calc(100vh - 94.75px)'
         sx={{ backgroundColor: 'lightgrey', mt: -2 }}
       >
-        <Typography
+        <Image src={smallScreen ? "/catena-mobile-background.jpg" : "/quartet-collage.jpg"} alt='Catena background' layout='fill' objectFit='cover' />
+        {/* <Typography
           variant='h2'
-          color='#5c5c5c'
+          color={theme.palette.grey[200]}
           my={4}
           textAlign='center'
+          zIndex={1}
         >
           Catena String Quartet
-        </Typography>
-        <Image src={'/catena-logo.jpg'} alt='Catena logo' height='500px' width='500px' style={{ borderRadius: 10 }} />
+        </Typography> */}
+        <Image src={'/catena-logo.png'} alt='Catena logo' height={logoDimension} width={logoDimension} style={{ borderRadius: 10 }} />
       </Box>
     </>
   )

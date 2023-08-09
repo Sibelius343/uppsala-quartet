@@ -1,15 +1,15 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { AppBar, Box, Button, Divider, Drawer, IconButton, Slide, styled, SxProps, Theme, Toolbar, useMediaQuery, useScrollTrigger, useTheme } from "@mui/material";
+import { AppBar, Box, Button, Divider, Drawer, IconButton, Slide, styled, SxProps, Theme, Toolbar, Typography, useMediaQuery, useScrollTrigger, useTheme } from "@mui/material";
 import Link from "next/link";
 import { faBars, faChevronLeft } from '@fortawesome/free-solid-svg-icons';
 import { useState } from "react";
+import Image from "next/image";
 
 const drawerWidth = 240;
 
 const navStyle: SxProps<Theme> = {
   display: 'flex',
   flexDirection: 'row',
-  justifyContent: { md: 'center' },
   backgroundColor: '#f0f0f0'
 };
 
@@ -57,6 +57,22 @@ const HideOnScroll: React.FC<HideOnScrollProps> = ({ children }) => {
   );
 }
 
+const NavLogo = () => {
+  const theme = useTheme();
+  const largeScreen = useMediaQuery(theme.breakpoints.up("md"));
+
+  return (
+    <Link href="/" passHref>
+      <Box display="flex" flexDirection="row" alignItems="center" gap={4} sx={{ ":hover": { cursor: 'pointer' } }}>
+        {largeScreen && <Image src="/catena-logo.png" alt="Catena logo" width={64} height={64} style={{ borderRadius: 4 }} />}
+        <Typography color={theme.palette.text.primary} fontSize="1.5rem" fontWeight={100} noWrap overflow="visible">
+          Catena String Quartet
+        </Typography>
+      </Box>
+    </Link>
+  )
+}
+
 const Navbar = () => {
   const [drawerOpen, setDrawerOpen] = useState(false);
   const theme = useTheme();
@@ -76,21 +92,28 @@ const Navbar = () => {
         <AppBar>
           <Toolbar sx={navStyle}>
             {smallScreen ?
-            <IconButton
-              sx={{ display: drawerOpen ? 'none' : '', width: '40px' }}
-              onClick={handleDrawerOpen}
-            >
-              <FontAwesomeIcon
-                icon={faBars}
-              />
-            </IconButton> :
-            <Box display="flex" gap={6}>
+            <Box display="flex">
+              <IconButton
+                sx={{ display: drawerOpen ? 'none' : '', width: '40px', mr: 2 }}
+                onClick={handleDrawerOpen}
+              >
+                <FontAwesomeIcon
+                  icon={faBars}
+                />
+              </IconButton>
+              <NavLogo />
+            </Box> :
+            <Box display="flex" width="100%">
+              <NavLogo />
+              <Box display="flex" flex={1} />
+              <Box display="flex" gap={6} alignItems="center">
               {['home', 'about', 'events', 'media', 'contact'].map(e => (
                 <NavButton
                   key={e}
                   navItem={e}
                 />
               ))}
+              </Box>
             </Box>}
           </Toolbar>
         </AppBar>
@@ -106,7 +129,6 @@ const Navbar = () => {
           },
         }}
         onClose={handleDrawerClose}
-        onClick={handleDrawerClose}
         PaperProps={{
           sx: {
             backgroundColor: '#f0f0f0'

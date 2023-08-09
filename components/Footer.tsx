@@ -1,4 +1,4 @@
-import { Box, Button, Dialog, SxProps, Theme } from "@mui/material"
+import { Box, Button, Dialog, useTheme } from "@mui/material"
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react"
 import useAdminContext from "../hooks/useAdminContext";
@@ -6,11 +6,14 @@ import useLocalStorage from "../hooks/useLocalStorage";
 import AdminLoginForm from "./AdminLoginForm";
 
 const Footer = () => {
+  const theme = useTheme()
   const [isLoginDialogOpen, setLoginDialogOpen] = useState(false);
   const { isAdmin, setIsAdmin } = useAdminContext();
   const [, setLocalValue] = useLocalStorage('catena_admin', false);
   const router = useRouter();
-  const [mounted, setMounted] = useState(false)
+  const [mounted, setMounted] = useState(false);
+
+  const isHomePage = router.pathname === '/';
 
   const handleLogout = () => {
     setLocalValue(false);
@@ -27,7 +30,6 @@ const Footer = () => {
       {mounted && (isAdmin ?
       <Button
         onClick={handleLogout}
-        variant='contained'
         color='error'
         size="small"
       >
@@ -36,6 +38,7 @@ const Footer = () => {
       <Button
         onClick={() => setLoginDialogOpen(true)}
         size="small"
+        sx={{ color: isHomePage ? theme.palette.grey[100] : theme.palette.grey[700] }}
       >
         Quartet Login
       </Button>)}

@@ -1,1 +1,1 @@
-export const DEFAULT_EVENT_IMAGE_PATH = '/catena-logo.jpg';
+export const DEFAULT_EVENT_IMAGE_PATH = '/catena-logo.png';

@@ -2,7 +2,7 @@ import type { NextPage } from 'next';
 import Head from 'next/head';
 import Image from 'next/image';
 import styles from '../styles/Home.module.css';
-import { Box, Typography, useMediaQuery, useTheme } from '@mui/material';
+import { Box, useMediaQuery, useTheme } from '@mui/material';
 
 const Home: NextPage = () => {
   const theme = useTheme()
@@ -14,7 +14,7 @@ const Home: NextPage = () => {
     <>
       <Head>
         <title>Catena String Quartet</title>
-        <meta property='description' content='The Catena String Quartet formed in 2022 and is based in Minneapolis, Minnesota. All dedicated musicians from an early age, they hold a particular love for chamber music. ' />
+        <meta name='description' content='The Catena String Quartet formed in 2022 and is based in Minneapolis, Minnesota. All dedicated musicians from an early age, they hold a particular love for chamber music. ' />
         <meta name='keywords' content='string quartet, classical music' />
       </Head>
       <Box

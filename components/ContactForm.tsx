@@ -3,6 +3,9 @@ import { Formik, Form, useField, FieldHookConfig, FormikHelpers } from "formik"
 import useNotificationContext from '../hooks/useNotificationContext';
 import { ContactFormData } from '../interfaces/formData';
 import * as Yup from 'yup';
+import { useState } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSpinner } from '@fortawesome/free-solid-svg-icons';
 
 type FieldProps = { label: string, rows?: number } & FieldHookConfig<string>;
 
@@ -42,6 +45,7 @@ const TextInput = ({ label, rows, ...props }: FieldProps) => {
 }
 
 const ContactForm = () => {
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const { setNotificationMessage } = useNotificationContext();
 
   const initialValues: ContactFormData = {
@@ -50,15 +54,18 @@ const ContactForm = () => {
     message: ''
   }
 
-  const handleSubmit = async (values: ContactFormData, helpers: FormikHelpers<ContactFormData>) => {   
+  const handleSubmit = async (values: ContactFormData, helpers: FormikHelpers<ContactFormData>) => {
+    setIsSubmitting(true);
     try {
       const response = await fetch('api/mail', {
         method: 'post',
         body: JSON.stringify(values)
       });
       await response.json();
+      setIsSubmitting(false);
       setNotificationMessage('Message sent successfully!');
     } catch (e) {
+      setIsSubmitting(false);
       setNotificationMessage('Error sending message');
     }
     helpers.resetForm();
@@ -94,7 +101,8 @@ const ContactForm = () => {
           variant='contained'
           type='submit'
           sx={{ mt: 1, display: 'flex', alignSelf: 'start' }}
-          disabled={!(isValid && dirty)}
+          disabled={!(isValid && dirty && !isSubmitting)}
+          endIcon={isSubmitting && <FontAwesomeIcon icon={faSpinner} spin />}
         >
           Send
         </Button>

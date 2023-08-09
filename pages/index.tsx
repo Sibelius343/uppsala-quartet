@@ -18,7 +18,7 @@ const Home: NextPage = () => {
         justifyContent='start'
         alignItems='center'
         width='100vw'
-        minHeight='calc(100vh - 36.5px)'
+        minHeight='calc(100vh - 94.75px)'
         sx={{ backgroundColor: 'lightgrey', mt: -2 }}
       >
         <Typography

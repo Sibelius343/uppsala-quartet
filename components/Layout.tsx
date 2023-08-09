@@ -12,7 +12,7 @@ const layoutStyle: SxProps<Theme> = {
   flexDirection: 'column',
   justifyContent: 'start',
   alignItems: 'center',
-  minHeight: 'calc(100vh - 36.5px)',
+  minHeight: 'calc(100vh - 94.75px)',
   pt: 2
 }
 

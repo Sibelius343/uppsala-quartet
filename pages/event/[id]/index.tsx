@@ -12,7 +12,7 @@ const Event: NextPage<PerformanceEvent> = ({ id, title, date, location, descript
       <Head>
         <title>{title}</title>
       </Head>
-      <Typography variant="h2">Event Details</Typography>
+      <Typography variant="h2" mb={2}>Event Details</Typography>
       <EventDetail
         id={id}
         title={title}

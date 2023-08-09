@@ -8,6 +8,7 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import NotificationContext from '../context/NotificationContext'
 import useLocalStorage from '../hooks/useLocalStorage'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+import { createTheme, ThemeProvider } from '@mui/material'
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -17,6 +18,14 @@ const queryClient = new QueryClient({
     }
   }
 });
+
+const theme = createTheme({
+  palette: {
+    background: {
+      paper: '#f6f6f6'
+    }
+  }
+})
 
 function MyApp({ Component, pageProps }: AppProps) {
   const [localValue] = useLocalStorage('catena_admin', false);
@@ -28,9 +37,11 @@ function MyApp({ Component, pageProps }: AppProps) {
       <NotificationContext.Provider value={{ notificationMessage, setNotificationMessage }}>
         <LocalizationProvider dateAdapter={AdapterDayjs}>
           <QueryClientProvider client={queryClient}>
-            <Layout>
-              <Component {...pageProps} />
-            </Layout>
+            <ThemeProvider theme={theme}>
+              <Layout>
+                <Component {...pageProps} />
+              </Layout>
+            </ThemeProvider>
           </QueryClientProvider>
         </LocalizationProvider>
       </NotificationContext.Provider>

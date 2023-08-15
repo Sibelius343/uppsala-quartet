@@ -8,7 +8,7 @@ const Home: NextPage = () => {
   const theme = useTheme()
   const smallScreen = useMediaQuery(theme.breakpoints.down('md'));
 
-  const logoDimension = "250px";
+  const logoDimension = "200px";
 
   return (
     <>
@@ -29,7 +29,7 @@ const Home: NextPage = () => {
         <Box position="fixed" width="100vw" height="100vh">
           <Image src={smallScreen ? "/catena-mobile-background.jpg" : "/quartet-collage.jpg"} alt='Catena background' layout='fill' objectFit='cover' />
         </Box>
-        <Image src={'/catena-logo.png'} alt='Catena logo' height={logoDimension} width={logoDimension} style={{ borderRadius: 10 }} />
+        <Image src={'/catena-logo.png'} alt='Catena logo' height={logoDimension} width={logoDimension} style={{ borderRadius: 1000 }} />
       </Box>
     </>
   )

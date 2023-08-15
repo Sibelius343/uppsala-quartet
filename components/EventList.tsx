@@ -1,4 +1,4 @@
-import { Divider, List, Box } from "@mui/material";
+import { Divider, List, Box, Typography, Paper } from "@mui/material";
 import EventListItem from "./EventListItem";
 import { PerformanceEvent } from '../interfaces/events';
 
@@ -7,14 +7,30 @@ interface EventListProps {
 }
 
 const EventList = ({ events }: EventListProps) => {
+  const currentDate = new Date().toISOString();
   const sortedEvents = events.sort((a, b) => {
-    if ((a.date || "0") < (b.date || "0")) return 1;
+    if ((a.date || "01-01-2999") < (b.date || "01-01-2999")) return 1;
     return -1
-  })
+  });
+  
+
+  
+  const pastEventsIndex = sortedEvents.findIndex(e => (e.date || "01-01-2999") < currentDate);
+  const upcomingEvents = sortedEvents.slice(0, pastEventsIndex < 0 ? sortedEvents.length : pastEventsIndex);
+  const pastEvents = sortedEvents.slice(pastEventsIndex < 0 ? sortedEvents.length : pastEventsIndex, sortedEvents.length);
 
   return (
     <List sx={{width: '90vw'}}>
-      {sortedEvents.map(({ id, title, date, location, description, imgUrl }, i) => (
+      {upcomingEvents.length > 0 && <Typography
+        variant="h4"
+        display="flex"
+        justifyContent="center"
+        alignItems="center"
+        sx={{ backgroundColor: '#d6d6d5', height: "75px", borderBottom: "solid 1px" }}
+      >
+        Upcoming Events
+      </Typography>}
+      {upcomingEvents.map(({ id, title, date, location, description, imgUrl }, i) => (
         <Box key={id}>
           <EventListItem
             id={id}
@@ -24,7 +40,29 @@ const EventList = ({ events }: EventListProps) => {
             description={description}
             imgUrl={imgUrl}
           />
-          {i < events.length - 1 && <Divider />}
+          {i < upcomingEvents.length - 1 && <Divider />}
+        </Box>
+      ))}
+      {pastEvents.length > 0 && <Typography
+        variant="h4"
+        display="flex"
+        justifyContent="center"
+        alignItems="center"
+        sx={{ backgroundColor: '#d6d6d5', height: "75px", borderBottom: "solid 1px" }}
+      >
+        Past Events
+      </Typography>}
+      {pastEvents.map(({ id, title, date, location, description, imgUrl }, i) => (
+        <Box key={id}>
+          <EventListItem
+            id={id}
+            title={title}
+            date={date}
+            location={location}
+            description={description}
+            imgUrl={imgUrl}
+          />
+          {i < pastEvents.length - 1 && <Divider />}
         </Box>
       ))}
     </List>

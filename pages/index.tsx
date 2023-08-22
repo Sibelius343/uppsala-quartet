@@ -29,7 +29,13 @@ const Home: NextPage = () => {
         <Box position="fixed" width="100vw" height="100vh">
           <Image src={smallScreen ? "/catena-mobile-background.jpg" : "/quartet-collage.jpg"} alt='Catena background' layout='fill' objectFit='cover' />
         </Box>
-        <Image src={'/catena-logo.png'} alt='Catena logo' height={logoDimension} width={logoDimension} style={{ borderRadius: 1000 }} />
+        <Box
+          display="flex"
+          position={smallScreen ? "static" : "absolute"}
+          top="calc(100vh - 200px)"
+          left={0}>
+        <Image src={'/catena-logo.png'} alt='Catena logo' height={logoDimension} width={logoDimension} style={{ borderRadius: smallScreen ? "1000px" : "0px 4px 0px 0px" }} />
+        </Box>
       </Box>
     </>
   )

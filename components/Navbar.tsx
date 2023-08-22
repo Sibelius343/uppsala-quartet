@@ -2,6 +2,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { AppBar, Box, Button, Divider, Drawer, IconButton, Slide, styled, SxProps, Theme, Toolbar, Typography, useMediaQuery, useScrollTrigger, useTheme } from "@mui/material";
 import Link from "next/link";
 import { faBars, faChevronLeft } from '@fortawesome/free-solid-svg-icons';
+import { faFacebook, faYoutube, faInstagram, IconDefinition } from "@fortawesome/free-brands-svg-icons";
 import { useState } from "react";
 import Image from "next/image";
 
@@ -38,6 +39,21 @@ const NavButton = ({ navItem, handleClick, isDrawerButton }: DrawerButtonProps) 
   )
 }
 
+interface SocialIconProps {
+  icon: IconDefinition;
+  socialAddress: string;
+}
+
+const SocialButton = ({ icon, socialAddress }: SocialIconProps) => {
+  return (
+    <a href={socialAddress} target="_blank" rel="noreferrer">
+      <IconButton sx={{ width: "40px" }}>
+        <FontAwesomeIcon icon={icon} />
+      </IconButton>
+    </a>
+  )
+}
+
 const DrawerHeader = styled('div')(({ theme }) => ({
   display: 'flex',
   alignItems: 'center',
@@ -59,12 +75,10 @@ const HideOnScroll: React.FC<HideOnScrollProps> = ({ children }) => {
 
 const NavLogo = () => {
   const theme = useTheme();
-  const largeScreen = useMediaQuery(theme.breakpoints.up("md"));
 
   return (
     <Link href="/" passHref>
       <Box display="flex" flexDirection="row" alignItems="center" gap={4} sx={{ ":hover": { cursor: 'pointer' } }}>
-        {largeScreen && <Image src="/catena-logo.png" alt="Catena logo" width={64} height={64} style={{ borderRadius: 4 }} />}
         <Typography color={theme.palette.text.primary} fontSize="1.5rem" fontWeight={100} noWrap overflow="visible">
           Catena String Quartet
         </Typography>
@@ -106,13 +120,18 @@ const Navbar = () => {
             <Box display="flex" width="100%">
               <NavLogo />
               <Box display="flex" flex={1} />
-              <Box display="flex" gap={6} alignItems="center">
+              <Box display="flex" gap={5} alignItems="center">
               {['home', 'about', 'events', 'media', 'contact'].map(e => (
                 <NavButton
                   key={e}
                   navItem={e}
                 />
               ))}
+              <Box>
+                <SocialButton icon={faFacebook} socialAddress="https://www.facebook.com/CatenaStringQuartet" />
+                <SocialButton icon={faInstagram} socialAddress="https://www.instagram.com/catenastringquartet/"/>
+                <SocialButton icon={faYoutube} socialAddress="https://www.youtube.com/@CatenaStringQuartet" />
+              </Box>
               </Box>
             </Box>}
           </Toolbar>
@@ -141,7 +160,7 @@ const Navbar = () => {
           </IconButton>
         </DrawerHeader>
         <Divider />
-        <Box display='flex' flexDirection="column" gap={1} pt={1}>
+        <Box display='flex' flexDirection="column" gap={1} py={1}>
         {['home', 'about', 'events', 'media', 'contact'].map(e => (
           <NavButton
             key={e}
@@ -150,6 +169,12 @@ const Navbar = () => {
             isDrawerButton
           />
         ))}
+        </Box>
+        <Box display="flex" flex={1} />
+        <Box display="flex" flexDirection="row" justifyContent="space-evenly" mb={1}>
+          <SocialButton icon={faFacebook} socialAddress="https://www.facebook.com/CatenaStringQuartet" />
+          <SocialButton icon={faInstagram} socialAddress="https://www.instagram.com/catenastringquartet/"/>
+          <SocialButton icon={faYoutube} socialAddress="https://www.youtube.com/@CatenaStringQuartet" />
         </Box>
       </Drawer>
     </>

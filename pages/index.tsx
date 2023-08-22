@@ -26,7 +26,7 @@ const Home: NextPage = () => {
         minHeight='calc(100vh - 94.75px)'
         sx={{ backgroundColor: 'lightgrey', mt: -2 }}
       >
-        <Box position="fixed" width="100vw" height="100vh">
+        <Box position="fixed" width="100vw" height="100vh" top={0}>
           <Image src={smallScreen ? "/catena-mobile-background.jpg" : "/quartet-collage.jpg"} alt='Catena background' layout='fill' objectFit='cover' />
         </Box>
         <Box

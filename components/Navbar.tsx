@@ -11,7 +11,7 @@ const drawerWidth = 240;
 const navStyle: SxProps<Theme> = {
   display: 'flex',
   flexDirection: 'row',
-  backgroundColor: '#f0f0f0'
+  backgroundColor: '#000000a3'
 };
 
 interface HideOnScrollProps {
@@ -26,7 +26,12 @@ interface DrawerButtonProps {
 
 const drawerButtonStyle: SxProps<Theme> = {
   justifyContent: 'start',
-  pl: 3
+  pl: 3,
+  color: "white"
+}
+
+const navBarButtonStyle: SxProps<Theme> = {
+  color: "white"
 }
 
 const NavButton = ({ navItem, handleClick, isDrawerButton }: DrawerButtonProps) => {
@@ -34,7 +39,7 @@ const NavButton = ({ navItem, handleClick, isDrawerButton }: DrawerButtonProps) 
 
   return (
     <Link href={path} passHref>
-      <Button sx={isDrawerButton ? drawerButtonStyle : undefined} onClick={handleClick}>{navItem}</Button>
+      <Button sx={isDrawerButton ? drawerButtonStyle : navBarButtonStyle} onClick={handleClick}>{navItem}</Button>
     </Link>
   )
 }
@@ -47,7 +52,7 @@ interface SocialIconProps {
 const SocialButton = ({ icon, socialAddress }: SocialIconProps) => {
   return (
     <a href={socialAddress} target="_blank" rel="noreferrer">
-      <IconButton sx={{ width: "40px" }}>
+      <IconButton sx={{ width: "40px", color: "white" }}>
         <FontAwesomeIcon icon={icon} />
       </IconButton>
     </a>
@@ -79,7 +84,7 @@ const NavLogo = () => {
   return (
     <Link href="/" passHref>
       <Box display="flex" flexDirection="row" alignItems="center" gap={4} sx={{ ":hover": { cursor: 'pointer' } }}>
-        <Typography color={theme.palette.text.primary} fontSize="1.5rem" fontWeight={100} noWrap overflow="visible">
+        <Typography color="white" fontSize="1.5rem" fontWeight={100} noWrap overflow="visible">
           Catena String Quartet
         </Typography>
       </Box>
@@ -103,7 +108,7 @@ const Navbar = () => {
   return (
     <>
       <HideOnScroll>
-        <AppBar>
+        <AppBar sx={{ backgroundColor: "#00000000" }}>
           <Toolbar sx={navStyle}>
             {smallScreen ?
             <Box display="flex">

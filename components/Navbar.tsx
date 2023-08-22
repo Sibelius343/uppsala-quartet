@@ -66,6 +66,7 @@ const DrawerHeader = styled('div')(({ theme }) => ({
   // necessary for content to be below app bar
   ...theme.mixins.toolbar,
   justifyContent: 'flex-end',
+  backgroundColor: "black"
 }));
 
 const HideOnScroll: React.FC<HideOnScrollProps> = ({ children }) => {
@@ -118,6 +119,7 @@ const Navbar = () => {
               >
                 <FontAwesomeIcon
                   icon={faBars}
+                  color="#cdcdcd"
                 />
               </IconButton>
               <NavLogo />
@@ -155,16 +157,16 @@ const Navbar = () => {
         onClose={handleDrawerClose}
         PaperProps={{
           sx: {
-            backgroundColor: '#f0f0f0'
+            backgroundColor: '#000000a3'
           }
         }}
       >
         <DrawerHeader>
           <IconButton onClick={handleDrawerClose} sx={{ width: "40px" }} >
-            <FontAwesomeIcon icon={faChevronLeft} />
+            <FontAwesomeIcon color="#cdcdcd" icon={faChevronLeft} />
           </IconButton>
         </DrawerHeader>
-        <Divider />
+        <Divider sx={{ backgroundColor: "#4b4b4b" }} />
         <Box display='flex' flexDirection="column" gap={1} py={1}>
         {['home', 'about', 'events', 'media', 'contact'].map(e => (
           <NavButton

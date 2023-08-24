@@ -9,8 +9,8 @@ interface MediaVideoItemProps {
 const MediaVideoItem = memo(({ embedId }: MediaVideoItemProps) => {
   const { data: video } = useYoutubeVideoData(embedId);
   const formattedDescription = video?.snippet.description
-    .replace(/\n{2,}/g, '\n')
-    .replace(/(https?:\/\/)?(w{3}\.)?\w+(\.\w{2,3})(\/\w*)*/gi, "");
+    // .replace(/\n{2,}/g, '\n')
+    // .replace(/(https?:\/\/)?(w{3}\.)?\w+(\.\w{2,3})(\/\w*)*/gi, "");
   return (
     <Box
       display="flex"

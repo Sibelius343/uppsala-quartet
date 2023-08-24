@@ -8,7 +8,9 @@ interface MediaVideoItemProps {
 
 const MediaVideoItem = memo(({ embedId }: MediaVideoItemProps) => {
   const { data: video } = useYoutubeVideoData(embedId);
-
+  const formattedDescription = video?.snippet.description
+    .replace(/\n{2,}/g, '\n')
+    .replace(/(https?:\/\/)?(w{3}\.)?\w+(\.\w{2,3})(\/\w*)*/gi, "");
   return (
     <Box
       display="flex"
@@ -34,11 +36,11 @@ const MediaVideoItem = memo(({ embedId }: MediaVideoItemProps) => {
         flex={3}
         overflow="hidden"
       >
-        <Typography variant="h4">
+        <Typography variant="h4" fontSize={28}>
           {video?.snippet.title}
         </Typography>
-        <Typography overflow="hidden" sx={{ display: "-webkit-box", WebkitBoxOrient: 'vertical', WebkitLineClamp: 4 }}>
-        {video?.snippet.description}
+        <Typography overflow="hidden" variant="body2" sx={{ whiteSpace: 'pre-line' }}>
+        {formattedDescription}
         </Typography>
       </Box>
     </Box>

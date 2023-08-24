@@ -17,7 +17,6 @@ const MediaVideoItem = memo(({ embedId }: MediaVideoItemProps) => {
       gap={2}
       flexDirection={{ xs: "column", md: "row" }}
       alignItems={{ xs: "center", md: "start"}}
-      textAlign={{ xs: "center", md: "start"}}
       width="80vw"
       overflow="hidden"
     >
@@ -36,10 +35,10 @@ const MediaVideoItem = memo(({ embedId }: MediaVideoItemProps) => {
         flex={3}
         overflow="hidden"
       >
-        <Typography variant="h4" fontSize={28}>
+        <Typography variant="h4" fontSize={28} textAlign={{ xs: "center", md: "start"}}>
           {video?.snippet.title}
         </Typography>
-        <Typography overflow="hidden" variant="body2" sx={{ whiteSpace: 'pre-line' }}>
+        <Typography overflow="hidden" variant="body2" sx={{ whiteSpace: 'pre-line', textAlign: 'start', alignSelf: { xs: 'center', md: 'start'} }}>
         {formattedDescription}
         </Typography>
       </Box>

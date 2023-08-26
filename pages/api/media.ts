@@ -1,4 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
+import { Video } from '../../interfaces/media';
 import media from '../../models/media';
 import dbConnect from '../../utils/dbConnect';
 
@@ -12,6 +13,20 @@ export default async function handler(
 ) {
   await dbConnect();
   switch (req.method) {
+    case "POST":
+      const video: Video = JSON.parse(req.body);
+
+      const newVideo = new media({
+        ...video
+      })
+    
+      try {
+        const savedVideo = await newVideo.save();
+        res.status(201).json(savedVideo.toJSON());
+      } catch (e) {
+        res.status(400);
+      }
+      break;
     case "PUT":
       const { videoIds } = JSON.parse(req.body) as EditVideosBody;
       

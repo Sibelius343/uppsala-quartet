@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router';
-import { TextField, Button, Box, Typography, Dialog, DialogTitle, DialogContent } from '@mui/material';
-import { Formik, Form, useField, FieldHookConfig } from "formik";
+import { TextField, Button, Box, Dialog, DialogTitle, DialogContent } from '@mui/material';
+import { Formik, Form, useField } from "formik";
 import { NewPerformanceEvent } from '../interfaces/events';
 import { LocalizationProvider, DateTimePicker } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
@@ -11,8 +11,7 @@ import { faImage } from '@fortawesome/free-regular-svg-icons';
 import Image from 'next/image';
 import ImagePicker from './ImagePicker';
 import { UnsplashImage } from '../interfaces/images';
-
-type FieldProps = { label: string, rows?: number } & FieldHookConfig<string>;
+import TextInput, { FieldProps } from './FormikTextInput';
 
 export interface FormValues {
   id: number,
@@ -32,24 +31,6 @@ const AddEventValidationSchema: Yup.ObjectSchema<any> = Yup.object().shape({
     .matches(/(0[1-9]|1[0-2]\/(0[1-9]|[1-2][0-9]|3[0-1])\/20[2-4][0-9]\s[0-1][0-9]:[0-6][0-9]\s(A|P)M)/,
     'Incorrect date format')
 })
-
-const TextInput = ({ label, rows, ...props }: FieldProps) => {
-  const [field, meta] = useField<string>(props);
-
-  return (
-    <TextField
-      id={label}
-      label={label}
-      error={Boolean(meta.touched && meta.error)}
-      helperText={meta.error}
-      fullWidth
-      multiline={Boolean(rows)}
-      rows={rows}
-      {...field}
-      sx={{ display: 'block', my: 2 }}
-    />
-  )
-}
 
 const DateInput = ({ label, rows, ...props}: FieldProps) => {
   const [field, meta, helpers] = useField<string>(props);

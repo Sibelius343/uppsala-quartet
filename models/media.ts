@@ -1,8 +1,10 @@
 import mongoose from "mongoose";
-import { Media } from "../interfaces/media";
+import { Video } from "../interfaces/media";
 
-const mediaSchema = new mongoose.Schema<Omit<Media, "id">>({
-  videoIds: [String]
+const mediaSchema = new mongoose.Schema<Omit<Video, "id">>({
+  videoId: String,
+  videoTitle: String,
+  videoDescription: String
 });
 
 mediaSchema.set('toJSON', {
@@ -13,4 +15,4 @@ mediaSchema.set('toJSON', {
   }
 })
 
-export default mongoose.models.Media as mongoose.Model<Media, {}, {}, {}, Media> || mongoose.model('Media', mediaSchema);
+export default mongoose.models.Media as mongoose.Model<Video, {}, {}, {}, Video> || mongoose.model('Media', mediaSchema);

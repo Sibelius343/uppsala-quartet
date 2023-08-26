@@ -1,14 +1,15 @@
-import { Box, Button, Dialog, Divider, Typography } from "@mui/material";
+import { Box, Button, Dialog, DialogContent, DialogTitle, Divider, Typography } from "@mui/material";
 import type { GetStaticProps, NextPage } from "next";
 import Head from "next/head";
 import { useEffect, useState } from "react";
-import EditVideosForm from "../components/EditVideosForm";
+import EditVideosForm from "../components/VideoIdSearch";
 import MediaVideoItem from "../components/MediaVideoItem";
+import VideoForm from "../components/VideoForm";
 import useAdminContext from "../hooks/useAdminContext";
-import { Media } from "../interfaces/media";
+import { MediaObject } from "../interfaces/media";
 import { loadMedia } from "../lib/loadMedia";
 
-const Media: NextPage<Media> = ({ videoIds }) => {
+const Media: NextPage<MediaObject> = ({ videos }) => {
   const { isAdmin } = useAdminContext();
   const [mounted, setMounted] = useState(false);
   const [isEditVideosDialogOpen, setIsEditVideosDialogOpen] = useState(false);  
@@ -23,10 +24,10 @@ const Media: NextPage<Media> = ({ videoIds }) => {
         <title>Media</title>
       </Head>
       <Typography mb={4} variant="h2">Media</Typography>
-      {videoIds.map((v, i) => (
-        <Box key={v}>
-          <MediaVideoItem embedId={v} />
-          {i < videoIds.length - 1 && 
+      {videos.map((v, i) => (
+        <Box key={v.videoId}>
+          <MediaVideoItem video={v} />
+          {i < videos.length - 1 && 
           <Divider sx={{ my: 4 }} />
           }
         </Box>
@@ -35,7 +36,7 @@ const Media: NextPage<Media> = ({ videoIds }) => {
       <Button
         onClick={() => setIsEditVideosDialogOpen(true)}
       >
-        Edit Videos
+        Add Video
       </Button>}
       <Dialog
         open={isEditVideosDialogOpen}
@@ -43,10 +44,12 @@ const Media: NextPage<Media> = ({ videoIds }) => {
         fullWidth
         maxWidth="md"
       >
-        <EditVideosForm
-          videoIds={videoIds}
-          handleClose={() => setIsEditVideosDialogOpen(false)}
-        />
+        <DialogTitle variant="h4">Add Video</DialogTitle>
+        <DialogContent>
+          <VideoForm
+            handleClose={() => setIsEditVideosDialogOpen(false)}
+          />
+        </DialogContent>
       </Dialog>
     </>
   )
@@ -55,11 +58,11 @@ const Media: NextPage<Media> = ({ videoIds }) => {
 export default Media;
 
 export const getStaticProps: GetStaticProps = async () => {
-  const media = await loadMedia();
+  const videos = await loadMedia();
 
   return {
     props: {
-      videoIds: media ? media.videoIds : []
+      videos
     },
     revalidate: 10
   }

@@ -5,11 +5,11 @@ export const loadMedia = async () => {
   await dbConnect();
 
   try {
-    const response = await media.findOne();
-    const data = response?.toJSON();
+    const response = await media.find({});
+    const data = response.map(e => e.toJSON());
     return data;
   } catch (e) {
     console.error(e);
-    return null;
+    return [];
   }
 }

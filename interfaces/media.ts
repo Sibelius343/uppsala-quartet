@@ -41,10 +41,12 @@ export interface YoutubeVideoData {
   }
 }
 
-export interface Media {
-  videoIds: string[];
+export interface Video {
+  videoId: string;
+  videoTitle: string;
+  videoDescription: string;
 }
 
 export interface MediaObject {
-  videoIds: string[];
+  videos: Video[];
 }

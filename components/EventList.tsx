@@ -20,7 +20,7 @@ const EventList = ({ events }: EventListProps) => {
   const pastEvents = sortedEvents.slice(pastEventsIndex < 0 ? sortedEvents.length : pastEventsIndex, sortedEvents.length);
 
   return (
-    <List sx={{width: '90vw'}}>
+    <List sx={{width: { xs: '100vw', sm:'90vw' }}}>
       {upcomingEvents.length > 0 && <Typography
         variant="h4"
         display="flex"

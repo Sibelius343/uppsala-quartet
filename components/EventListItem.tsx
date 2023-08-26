@@ -60,9 +60,9 @@ const EventListItem = ({ id, title, date, location, description, imgUrl }: Perfo
             alt={`${title} image`}
           />
         </Box>
-        <Box flexDirection='column' overflow='hidden' ml={2}>
+        <Box flexDirection='column' overflow='hidden' ml={2} maxWidth="100%">
           <ListItemText
-            primary={<Typography variant="h4">{title}</Typography>}
+            primary={<Typography textAlign={{ xs: 'center', sm: 'start' }} variant="h4">{title}</Typography>}
           />
           <ItemDescription
             date={formattedDate}

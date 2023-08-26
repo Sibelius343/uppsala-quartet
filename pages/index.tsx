@@ -8,7 +8,7 @@ const Home: NextPage = () => {
   const theme = useTheme()
   const smallScreen = useMediaQuery(theme.breakpoints.down('md'));
 
-  const logoDimension = "200px";
+  const logoDimension = 200;
 
   return (
     <>

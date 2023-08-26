@@ -11,12 +11,19 @@ interface VideoIdSearchProps {
 
 const VideoIdSearch = ({ setVideo }: VideoIdSearchProps) => {
   const [videoIdText, setVideoIdText] = useState("");
-  const { refetch, isRefetching } = useYoutubeVideoData(videoIdText, true);
+  const [error, setError] = useState(false);
+  const [loading, setIsLoading] = useState(false);
+  const { refetch } = useYoutubeVideoData(videoIdText, true);
 
   const handleVideoSearch = async () => {
+    setError(false);
+    setIsLoading(true);
     const { data, isSuccess } = await refetch();
+    setIsLoading(false);
     if (isSuccess && data) {
       setVideo(data);
+    } else {
+      setError(true)
     }
   }
 
@@ -37,6 +44,8 @@ const VideoIdSearch = ({ setVideo }: VideoIdSearchProps) => {
         }}
         placeholder="Youtube video id (text after youtube.com/watch?v=)"
         fullWidth
+        error={error}
+        helperText={error && "Video not found"}
         onChange={(e) => {
           setVideoIdText(e.target.value);
         }}
@@ -44,9 +53,9 @@ const VideoIdSearch = ({ setVideo }: VideoIdSearchProps) => {
       <Box>
         <IconButton onClick={handleVideoSearch}>
           <FontAwesomeIcon
-            icon={isRefetching ? faSpinner : faSearch}
+            icon={loading ? faSpinner : faSearch}
             width="24px"
-            spin={isRefetching}
+            spin={loading}
             color={"#1976d2"}
           />
         </IconButton>

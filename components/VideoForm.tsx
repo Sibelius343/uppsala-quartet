@@ -15,6 +15,9 @@ const VideoValidationSchema: Yup.ObjectSchema<any> = Yup.object().shape({
 
 interface VideoFormProps {
   handleClose: () => void;
+  videoEditId?: string;
+  videoEditTitle?: string;
+  videoEditDescription?: string;
 }
 
 interface VideoFormValues {
@@ -22,16 +25,33 @@ interface VideoFormValues {
   videoDescription: string;
 }
 
-const VideoForm = ({ handleClose }: VideoFormProps) => {
+const VideoForm = ({ handleClose, videoEditId, videoEditTitle = '', videoEditDescription = '' }: VideoFormProps) => {
   const [video, setVideo] = useState<YoutubeVideoItem>();
   const { setNotificationMessage } = useNotificationContext();
   const initialValues: VideoFormValues = {
-    videoTitle: video?.snippet.title || '',
-    videoDescription: video?.snippet.description || '',
+    videoTitle: videoEditId ? videoEditTitle : video?.snippet.title || '',
+    videoDescription: videoEditId ? videoEditDescription : video?.snippet.description || '',
   }  
 
   const handleSubmit = async (values: VideoFormValues) => {
-    if (video) {
+    if (videoEditId) {
+      const editedVideo: Video = {
+        videoId: videoEditId,
+        ...values
+      }
+
+      try {
+        await fetch('api/media', {
+          method: 'put',
+          body: JSON.stringify(editedVideo)
+        });
+        setNotificationMessage('Video updated successfully.')
+        handleClose();
+      } catch(e) {
+        setNotificationMessage('Error updating video.')
+        handleClose();
+      }
+    } else if (video) {
       const newVideo: Video = {
         videoId: video.id,
         ...values
@@ -42,24 +62,25 @@ const VideoForm = ({ handleClose }: VideoFormProps) => {
           method: 'post',
           body: JSON.stringify(newVideo)
         });
-        setNotificationMessage('Videos updated successfully.')
+        setNotificationMessage('Video added successfully.')
         handleClose();
       } catch(e) {
-        setNotificationMessage('Error updating videos.')
+        setNotificationMessage('Error adding video.')
+        handleClose();
       }
     }
   }
 
   return (
     <Stack>
-      <VideoIdSearch setVideo={setVideo} />
+      {!videoEditId && <VideoIdSearch setVideo={setVideo} />}
       <Formik
         initialValues={initialValues}
         onSubmit={handleSubmit}
         validationSchema={VideoValidationSchema}
         enableReinitialize
       >
-        {({ isValid }) => (
+        {({ isValid, dirty }) => (
         <Form>
           <TextInput
             label='Video Title'
@@ -79,6 +100,7 @@ const VideoForm = ({ handleClose }: VideoFormProps) => {
             >
               Cancel
             </Button>
+            {!videoEditId ?
             <Button
               variant='contained'
               type='submit'
@@ -86,7 +108,15 @@ const VideoForm = ({ handleClose }: VideoFormProps) => {
               disabled={(!isValid || !video)}
             >
               Submit Video
-            </Button>
+            </Button> :
+            <Button
+              variant='contained'
+              type='submit'
+              sx={{ mt: 1 }}
+              disabled={(!isValid || !dirty)}
+            >
+              Edit Video
+            </Button>}
           </Stack>
         </Form>
         )}

@@ -1,11 +1,46 @@
-import { Box, Typography } from "@mui/material";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Box, Dialog, DialogContent, DialogTitle, IconButton, Menu, MenuItem, Typography, useTheme } from "@mui/material";
 import { Video } from "../interfaces/media";
+import { faEllipsisVertical } from '@fortawesome/free-solid-svg-icons';
+import { useEffect, useState } from "react";
+import useAdminContext from "../hooks/useAdminContext";
+import VideoForm from "./VideoForm";
+import DeleteVideoDialog from "./DeleteVideoDialog";
 
 interface MediaVideoItemProps {
   video: Video
 }
 
 const MediaVideoItem = ({ video: { videoId, videoTitle, videoDescription } }: MediaVideoItemProps) => {
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+  const [isVideoEditOpen, setIsVideoEditOpen] = useState(false);
+  const [isVideoDeleteOpen, setIsVideoDeleteOpen] = useState(false);
+  const theme = useTheme();
+
+  const open = Boolean(anchorEl);
+  const handleOpenMenu = (event: React.MouseEvent<HTMLButtonElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+  const handleEditItemClick = () => {
+    handleClose();
+    setIsVideoEditOpen(true);
+  }
+  const handleDeleteItemClick = () => {
+    handleClose();
+    setIsVideoDeleteOpen(true);
+  }
+
+  const [isMounted, setIsMounted] = useState(false);
+
+  const { isAdmin } = useAdminContext();
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, [])
+
   return (
     <Box
       display="flex"
@@ -29,13 +64,58 @@ const MediaVideoItem = ({ video: { videoId, videoTitle, videoDescription } }: Me
         flex={3}
         overflow="hidden"
       >
-        <Typography variant="h4" fontSize={28} textAlign={{ xs: "center", md: "start"}}>
-          {videoTitle}
-        </Typography>
+        <Box display="flex" justifyContent="space-between">
+          <Typography variant="h4" fontSize={28} textAlign={{ xs: "center", md: "start"}}>
+            {videoTitle}
+          </Typography>
+          {(isAdmin && isMounted) && 
+          <IconButton
+            onClick={handleOpenMenu}
+            sx={{ alignSelf: 'start', width: 37 }}
+          >
+            <FontAwesomeIcon
+              icon={faEllipsisVertical}
+              size="sm"
+            />
+          </IconButton>}
+          <Menu
+            id="basic-menu"
+            anchorEl={anchorEl}
+            open={open}
+            onClose={handleClose}
+            MenuListProps={{
+              'aria-labelledby': 'basic-button',
+            }}
+          >
+            <MenuItem onClick={handleEditItemClick}>Edit</MenuItem>
+            <MenuItem onClick={handleDeleteItemClick} sx={{ color: theme.palette.error.main }}>Delete</MenuItem>
+          </Menu>
+        </Box>
         <Typography overflow="hidden" textOverflow="ellipsis" variant="body2" sx={{ whiteSpace: 'pre-line', textAlign: 'start', alignSelf: { xs: 'center', md: 'start'} }}>
-        {videoDescription}
+          {videoDescription}
         </Typography>
       </Box>
+      <Dialog
+        open={isVideoEditOpen}
+        onClose={() => setIsVideoEditOpen(false)}
+        fullWidth
+        maxWidth="md"
+      >
+        <DialogTitle variant="h4">Edit Video Details</DialogTitle>
+        <DialogContent>
+          <VideoForm
+            handleClose={() => setIsVideoEditOpen(false)}
+            videoEditId={videoId}
+            videoEditTitle={videoTitle}
+            videoEditDescription={videoDescription}
+          />
+        </DialogContent>
+      </Dialog>
+      <DeleteVideoDialog
+        isVideoDeleteOpen={isVideoDeleteOpen}
+        setIsVideoDeleteOpen={setIsVideoDeleteOpen}
+        videoId={videoId}
+      />
     </Box>
   )
 }

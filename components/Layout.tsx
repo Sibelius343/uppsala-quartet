@@ -21,6 +21,7 @@ const Layout = ({ children }: LayoutProps) => {
   return (
     <>
       <Navbar />
+      <Box position='absolute' top={0} left={0} height={64} width="100%" sx={{ backgroundColor: '#e5e5e5' }} />
       <Box sx={layoutStyle}>
         {children}
       </Box>

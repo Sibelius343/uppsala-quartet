@@ -85,7 +85,7 @@ const NavLogo = () => {
   return (
     <Link href="/" passHref>
       <Box display="flex" flexDirection="row" alignItems="center" gap={4} sx={{ ":hover": { cursor: 'pointer' } }}>
-        <Typography color="white" fontSize="1.5rem" fontWeight={100} noWrap overflow="visible">
+        <Typography color="white" fontSize="1.5rem" fontWeight={100} noWrap overflow="visible" fontFamily='cursive'>
           Catena String Quartet
         </Typography>
       </Box>

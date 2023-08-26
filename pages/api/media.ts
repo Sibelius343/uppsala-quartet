@@ -28,14 +28,27 @@ export default async function handler(
       }
       break;
     case "PUT":
-      const { videoIds } = JSON.parse(req.body) as EditVideosBody;
-      
       try {
-        const updatedVideos = await media.findOneAndUpdate({}, { videoIds: videoIds });
+        const updatedVideoData: Video = JSON.parse(req.body);
+        const response = await media.findOneAndUpdate({ videoId: updatedVideoData.videoId }, updatedVideoData);
         
-        res.status(200).json({ updatedVideos })
-      } catch (error) {
-        res.status(400).json({ error })
+        if (response) {
+          const updatedVideo = response.toJSON();
+          res.status(200).json(updatedVideo);
+        } else {
+          res.status(404).json(`Can't update ${req.query.id} -- not found`);
+        }
+      } catch (e: any) {
+        res.status(400).json(e);
+      }
+      break;
+    case "DELETE":
+      const { videoId }: Video = JSON.parse(req.body);
+      try {
+        await media.findOneAndDelete({ videoId });
+        res.status(200).json(req.body);
+      } catch (e: any) {
+        res.status(400).json(e);
       }
       break;
     default:

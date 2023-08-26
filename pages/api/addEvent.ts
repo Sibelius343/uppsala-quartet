@@ -1,5 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
-import { FormValues } from '../../components/AddEventForm';
+import { FormValues } from '../../components/EventForm';
 import { NewPerformanceEvent } from '../../interfaces/events';
 import event from '../../models/event';
 import dbConnect from '../../utils/dbConnect';

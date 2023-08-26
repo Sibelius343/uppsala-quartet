@@ -2,7 +2,7 @@ import { Card, CardMedia, CardContent, Typography, Box, IconButton, Dialog } fro
 import useAdminContext from "../hooks/useAdminContext";
 import { Performer } from "../interfaces/performer";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEllipsisV } from '@fortawesome/free-solid-svg-icons';
+import { faPencil } from '@fortawesome/free-solid-svg-icons';
 import { useEffect, useState } from "react";
 import EditTextForm, { ItemEnum } from "./EditTextForm";
 
@@ -31,10 +31,14 @@ const BioCard = ({ id, name, instrument, bio, picUri }: Performer) => {
             <Typography gutterBottom variant="h5" component="div">
               {name}, {instrument}
             </Typography>
-            {(isAdmin && isMounted) && <IconButton onClick={() => setIsEditTextOpen(true)}>
+            {(isAdmin && isMounted) && 
+            <IconButton
+              onClick={() => setIsEditTextOpen(true)}
+              sx={{ alignSelf: 'start' }}
+            >
               <FontAwesomeIcon
-                icon={faEllipsisV}
-                width="24px"
+                icon={faPencil}
+                size="sm"
               />
             </IconButton>}
           </Box>

@@ -9,6 +9,7 @@ interface ImagePickerProps {
   query: string;
   selectedImage?: UnsplashImage;
   setSelectedImage: Dispatch<SetStateAction<UnsplashImage | undefined>>;
+  setExistingImage: Dispatch<SetStateAction<string | undefined>>;
   page: number;
   setPage: Dispatch<SetStateAction<number>>;
   handleClose: () => void;
@@ -42,7 +43,7 @@ const SelectedOverlay = ({ x, y, width, height }: SelectOverlayProps) => {
   )
 }
 
-const ImagePicker = ({ query, selectedImage, setSelectedImage, page, setPage, handleClose }: ImagePickerProps) => {
+const ImagePicker = ({ query, selectedImage, setSelectedImage, setExistingImage, page, setPage, handleClose }: ImagePickerProps) => {
   const [apiResponse, setApiResponse] = useState<UnsplashApiResponse>();
   const [clickedImage, setClickedImage] = useState<UnsplashImage | undefined>();
   
@@ -51,7 +52,7 @@ const ImagePicker = ({ query, selectedImage, setSelectedImage, page, setPage, ha
    
   useEffect(() => {
     const fetchImages = async () => {
-      const result = await fetch('api/imageSearch', {
+      const result = await fetch('/api/imageSearch', {
         method: 'post',
         body: JSON.stringify({ query, page, perPage: 9 })
       })
@@ -75,6 +76,7 @@ const ImagePicker = ({ query, selectedImage, setSelectedImage, page, setPage, ha
   const handleSelectPhoto = () => {
     if(clickedImage) {
       setSelectedImage(clickedImage);
+      setExistingImage(undefined);
     }
     handleClose();
   }

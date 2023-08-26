@@ -1,4 +1,4 @@
-import { Card, CardContent, Typography, Button, Link, CardMedia, Box } from "@mui/material";
+import { Card, CardContent, Typography, Button, Link, CardMedia, Box, IconButton, Dialog, DialogTitle, DialogContent } from "@mui/material";
 import { useEffect, useState } from "react";
 import useAdminContext from "../hooks/useAdminContext"
 import { PerformanceEvent } from "../interfaces/events"
@@ -7,11 +7,15 @@ import dayjs from "dayjs";
 import advancedFormat from "dayjs/plugin/advancedFormat";
 import { DEFAULT_EVENT_IMAGE_PATH } from "../constants/paths";
 import { useRouter } from "next/router";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPencil } from '@fortawesome/free-solid-svg-icons';
+import EventForm from "./EventForm";
 
 dayjs.extend(advancedFormat);
 
 const EventDetail = ({ id, title, date, location, description, imgUrl } : PerformanceEvent ) => {
   const [isMounted, setIsMounted] = useState(false);
+  const [isEditEventOpen, setIsEditEventOpen] = useState(false);
   const { isAdmin } = useAdminContext();
   const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
   const router = useRouter();
@@ -38,13 +42,25 @@ const EventDetail = ({ id, title, date, location, description, imgUrl } : Perfor
         component="img"
         image={src}
         alt='Quartet pic'
-        sx={{width: { xs: '100%', sm: '33%' }}}
+        sx={{ width: { xs: '100%', sm: '33%' }, aspectRatio: '4/3' }}
       />
       <CardContent sx={{ display: 'flex', flexDirection: 'column', flexGrow: 1, justifyContent: 'space-between'}}>
         <Box>
-        <Typography gutterBottom variant="h4" component="div">
-          {title}
-        </Typography>
+          <Box display="flex" justifyContent="space-between">
+            <Typography gutterBottom variant="h4" component="div">
+              {title}
+            </Typography>
+            {(isAdmin && isMounted) && 
+            <IconButton
+              onClick={() => setIsEditEventOpen(true)}
+              sx={{ alignSelf: 'start' }}
+            >
+              <FontAwesomeIcon
+                icon={faPencil}
+                size="sm"
+              />
+            </IconButton>}
+          </Box>
         {date && <Typography variant="subtitle1">
           {formattedDate}
         </Typography>}
@@ -63,6 +79,27 @@ const EventDetail = ({ id, title, date, location, description, imgUrl } : Perfor
         id={id}
         title={title}
       />
+      <Dialog
+        open={isEditEventOpen}
+        onClose={() => setIsEditEventOpen(false)}
+        maxWidth={'lg'}
+        fullWidth
+      >
+        <DialogTitle variant="h4" textAlign="center">
+          Edit Event
+        </DialogTitle>
+        <DialogContent>
+          <EventForm
+            handleNavigate={() => setIsEditEventOpen(false)}
+            id={id}
+            title={title}
+            date={date}
+            location={location}
+            description={description}
+            imgUrl={imgUrl}
+          />
+        </DialogContent>
+      </Dialog>
     </Card>
   )
 }

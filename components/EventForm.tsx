@@ -79,19 +79,30 @@ const DateInput = ({ label, rows, ...props}: FieldProps) => {
   )
 }
 
-const AddEventForm = () => {
+interface EventFormProps {
+  handleNavigate: () => void;
+  id?: string;
+  title?: string;
+  date?: string;
+  location?: string;
+  description?: string;
+  imgUrl?: string;
+}
+
+const EventForm = ({ handleNavigate, id, title = '', date = '', location = '', description = '', imgUrl }: EventFormProps) => {
   const [searchValue, setSearchValue] = useState('');
   const [photoQuery, setPhotoQuery] = useState('');
   const [selectedPhoto, setSelectedPhoto] = useState<UnsplashImage>();
+  const [existingImgUrl, setExistingImgUrl] = useState(imgUrl);
   const [isOpen, setIsOpen] = useState(false);
   const [page, setPage] = useState(1);
   const router = useRouter();
 
   const initialValues: NewPerformanceEvent = {
-    title: '',
-    date: '',
-    location: '',
-    description: ''
+    title,
+    date,
+    location,
+    description
   }
 
   const handleImageFormSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -100,28 +111,35 @@ const AddEventForm = () => {
   }
 
   const handleSubmit = async (values: NewPerformanceEvent) => {
-    const newEvent: NewPerformanceEvent = { ...values, imgUrl: selectedPhoto?.urls.small || '' };
+    const newEvent: NewPerformanceEvent = { ...values, imgUrl: existingImgUrl ? existingImgUrl : selectedPhoto?.urls.small || '' };
 
-    await fetch('api/addEvent', {
-      method: 'post',
-      body: JSON.stringify(newEvent)
-    });
-    
-    router.push('/events');
+    if (!id) {
+      await fetch('api/addEvent', {
+        method: 'post',
+        body: JSON.stringify(newEvent)
+      });
+    } else {
+      await fetch(`/api/events/${id}`, {
+        method: 'put',
+        body: JSON.stringify(newEvent)
+      })
+    }
+
+    handleNavigate();
   };
 
   const handleCancel = () => {
-    router.push('/events');
+    handleNavigate();
   };
 
   return (
-    <Box sx={{ width: '75%' }}>
+    <Box>
       <Formik
         initialValues={initialValues}
         onSubmit={handleSubmit}
         validationSchema={AddEventValidationSchema}
       >
-        {({ isValid, touched }) => (
+        {({ isValid, dirty }) => (
         <Form>
           <TextInput
             label='Event Name'
@@ -144,8 +162,10 @@ const AddEventForm = () => {
             type='text'
             rows={4}
           />
-          <Box sx={{ display: 'flex', gap: 2 }} >
-            {selectedPhoto ?
+          <Box sx={{ display: 'flex', gap: 2 }}>
+            {existingImgUrl ?
+            <Image src={existingImgUrl} alt={'Event Image'} width={150} height={150} objectFit='cover' /> :
+            selectedPhoto ?
             <Image src={selectedPhoto.urls.small} alt={'Event Image'} width={150} height={150} objectFit='cover' /> :
             <FontAwesomeIcon icon={faImage} size="10x" color='#d4d4d4' />}
             <Box sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', gap: 2 }} >
@@ -158,7 +178,7 @@ const AddEventForm = () => {
               </Button>
             </Box>
           </Box>
-          <Box>
+          <Box display="flex" flexDirection="row" justifyContent="end">
             <Button
               sx={{ mt: 1 }}
               onClick={handleCancel}
@@ -169,9 +189,9 @@ const AddEventForm = () => {
               variant='contained'
               type='submit'
               sx={{ mt: 1 }}
-              disabled={!isValid || !Boolean(touched.title)}
+              disabled={(!isValid || !dirty) && !id}
             >
-              Create Event
+              {id ? 'Update Event' : 'Create Event' }
             </Button>
           </Box>
         </Form>
@@ -196,6 +216,7 @@ const AddEventForm = () => {
             query={photoQuery}
             selectedImage={selectedPhoto}
             setSelectedImage={setSelectedPhoto}
+            setExistingImage={setExistingImgUrl}
             page={page}
             setPage={setPage}
             handleClose={() => setIsOpen(false)}
@@ -206,4 +227,4 @@ const AddEventForm = () => {
   )
 };
 
-export default AddEventForm;
+export default EventForm;

@@ -2,7 +2,7 @@ import { Card, CardMedia, CardContent, Typography, IconButton, Dialog } from "@m
 import { useEffect, useState } from "react";
 import useAdminContext from "../hooks/useAdminContext";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEllipsisV } from '@fortawesome/free-solid-svg-icons';
+import { faPencil } from '@fortawesome/free-solid-svg-icons';
 import EditTextForm, { ItemEnum } from "./EditTextForm";
 
 interface CardProps {
@@ -34,10 +34,14 @@ const AboutQuartetCard = ({ id, picUri, text }: CardProps) => {
           <Typography variant="body2" color="text.secondary" whiteSpace='pre-wrap'>
             {text}
           </Typography>
-          {(isAdmin && isMounted) && <IconButton onClick={() => setIsEditTextOpen(true)} sx={{ alignSelf: 'start'}} >
+          {(isAdmin && isMounted) &&
+          <IconButton
+            onClick={() => setIsEditTextOpen(true)}
+            sx={{ alignSelf: 'start' }}
+          >
             <FontAwesomeIcon
-              icon={faEllipsisV}
-              width="24px"
+              icon={faPencil}
+              size="sm"
             />
           </IconButton>}
         </CardContent>

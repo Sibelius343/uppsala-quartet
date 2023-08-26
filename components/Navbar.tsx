@@ -5,13 +5,6 @@ import { faBars, faChevronLeft } from '@fortawesome/free-solid-svg-icons';
 import { faFacebook, faYoutube, faInstagram, IconDefinition } from "@fortawesome/free-brands-svg-icons";
 import { useState } from "react";
 import Image from "next/image";
-import { Alex_Brush } from "next/font/google";
-
-const navLogoFont = Alex_Brush({
-  subsets: ['latin'],
-  weight: ['400'],
-  style: ['normal'],
-})
 
 const drawerWidth = 240;
 
@@ -92,7 +85,7 @@ const NavLogo = () => {
   return (
     <Link href="/" passHref>
       <Box display="flex" flexDirection="row" alignItems="center" gap={4} sx={{ ":hover": { cursor: 'pointer' } }}>
-        <Typography color="white" fontSize="25px" noWrap overflow="visible" className={navLogoFont.className}>
+        <Typography color="white" fontSize="1.5rem" fontWeight={100} noWrap overflow="visible" fontFamily='cursive'>
           Catena String Quartet
         </Typography>
       </Box>
@@ -131,7 +124,7 @@ const Navbar = () => {
               </IconButton>
               <NavLogo />
             </Box> :
-            <Box display="flex" width="100%" alignItems="center">
+            <Box display="flex" width="100%">
               <NavLogo />
               <Box display="flex" flex={1} />
               <Box display="flex" gap={5} alignItems="center">

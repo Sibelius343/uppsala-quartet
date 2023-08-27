@@ -13,3 +13,19 @@ export const loadPerformers = async () => {
     return [];
   }
 }
+
+export const loadSinglePerformer = async (id: any) => {
+  await dbConnect();
+
+  if (id) {
+    try {
+      const response = await performer.findById(id);
+      return response?.toJSON();
+    } catch (e) {
+      console.error(e)
+      return null;
+    }
+  } else {
+    return null;
+  }
+}

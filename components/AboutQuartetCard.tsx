@@ -1,9 +1,10 @@
-import { Card, CardMedia, CardContent, Typography, IconButton, Dialog } from "@mui/material"
+import { Card, CardMedia, CardContent, Typography, IconButton, Dialog, Box } from "@mui/material"
 import { useEffect, useState } from "react";
 import useAdminContext from "../hooks/useAdminContext";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPencil } from '@fortawesome/free-solid-svg-icons';
 import EditTextForm, { ItemEnum } from "./EditTextForm";
+import Image from "next/image";
 
 interface CardProps {
   id: string,
@@ -23,29 +24,30 @@ const AboutQuartetCard = ({ id, picUri, text }: CardProps) => {
 
   return (
     <>
-      <Card sx={{ display: 'flex', flexDirection: { xs: 'column', sm: 'row' }, mx: 2, alignSelf: 'stretch' }}>
-        <CardMedia
-          component="img"
-          image={picUri}
-          alt='Quartet pic'
-          sx={{ maxWidth: '400px', maxHeight: '400px', display: 'flex', alignSelf: 'center'}}
-        />
-        <CardContent sx={{ display: 'flex', flexDirection: 'row'}}>
-          <Typography variant="body2" color="text.secondary" whiteSpace='pre-wrap'>
-            {text}
-          </Typography>
-          {(isAdmin && isMounted) &&
-          <IconButton
-            onClick={() => setIsEditTextOpen(true)}
-            sx={{ alignSelf: 'start' }}
-          >
-            <FontAwesomeIcon
-              icon={faPencil}
-              size="sm"
-            />
-          </IconButton>}
-        </CardContent>
-      </Card>
+      <Box
+        px={{ xs: 3, md: 6 }}
+      >
+        <Box sx={{ float: { xs: 'none', sm: 'left' }, mr: 2, textAlign: 'center' }}>
+          <Image
+            src={picUri}
+            alt='Quartet Bio'
+            width={400}
+            height={300}
+            style={{ borderRadius: '4px' }}
+          />
+        </Box>
+        {(isAdmin && isMounted) &&
+        <IconButton
+          onClick={() => setIsEditTextOpen(true)}
+          sx={{ alignSelf: 'start', float: 'right' }}
+        >
+          <FontAwesomeIcon
+            icon={faPencil}
+            size="sm"
+          />
+        </IconButton>}
+        <Typography whiteSpace="pre-line">{text}</Typography>
+      </Box>
       <Dialog
         open={isEditTextOpen}
         onClose={() => setIsEditTextOpen(false)}

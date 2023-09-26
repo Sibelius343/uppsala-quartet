@@ -13,8 +13,6 @@ const EventList = ({ events }: EventListProps) => {
     return -1
   });
   
-
-  
   const pastEventsIndex = sortedEvents.findIndex(e => (e.date || "01-01-2999") < currentDate);
   const upcomingEvents = sortedEvents.slice(0, pastEventsIndex < 0 ? sortedEvents.length : pastEventsIndex);
   const pastEvents = sortedEvents.slice(pastEventsIndex < 0 ? sortedEvents.length : pastEventsIndex, sortedEvents.length);
@@ -24,11 +22,11 @@ const EventList = ({ events }: EventListProps) => {
       {upcomingEvents.length > 0 && <Typography
         variant="h4"
         display="flex"
-        justifyContent="center"
-        alignItems="center"
-        sx={{ backgroundColor: '#d6d6d5', height: "75px", borderBottom: "solid 1px" }}
+        alignItems="end"
+        fontWeight="light"
+        sx={{ height: "75px", width: "25%", borderBottom: "solid 2px" }}
       >
-        Upcoming Events
+        Upcoming
       </Typography>}
       {upcomingEvents.map(({ id, title, date, location, description, imgUrl }, i) => (
         <Box key={id}>
@@ -46,11 +44,11 @@ const EventList = ({ events }: EventListProps) => {
       {pastEvents.length > 0 && <Typography
         variant="h4"
         display="flex"
-        justifyContent="center"
-        alignItems="center"
-        sx={{ backgroundColor: '#d6d6d5', height: "75px", borderBottom: "solid 1px" }}
+        alignItems="end"
+        fontWeight="light"
+        sx={{ height: "75px", width: "25%", borderBottom: "solid 2px" }}
       >
-        Past Events
+        Past
       </Typography>}
       {pastEvents.map(({ id, title, date, location, description, imgUrl }, i) => (
         <Box key={id}>

@@ -14,23 +14,57 @@ interface ItemDescription {
   description?: string
 }
 
+const DateElement = ({ date, src, title }: { date: string, src: string, title: string }) => {
+  const [month, day] = dayjs(date).format("MMM,DD").split(",");
+
+  return (
+    <Box width="100%" position="relative">
+      <Image
+        src={src}
+        layout="fill"
+        objectFit="cover"
+        alt={`${title} image`}
+      />
+      <Box
+        position="absolute"
+        top={5}
+        right={5}
+        width={75}
+        height={75}
+        display="flex"
+        flexDirection="column"
+        alignItems="center"
+        justifyContent="center"
+        sx={{ backgroundColor: "white", borderRadius: 1 }}
+      >
+        <Typography fontSize={16} fontWeight="light" lineHeight={1.15}>
+          {month.toUpperCase()}
+        </Typography>
+        <Typography fontSize={22} fontWeight="bold" lineHeight={1.15}>
+          {day}
+        </Typography>
+      </Box>
+    </Box>
+  )
+}
+
 const ItemDescription = ({ date, location, description }: ItemDescription) => {
   const descriptionLines = description ? description.split('\n') : [];
 
   return (
-    <Box color={'GrayText'} >
-      {date && <Typography variant="subtitle1">
+    <Box display="flex" flexDirection="column" mt={1}>
+      {date && <Typography fontSize={18}>
         {date}
       </Typography>}
-      {location && <Typography variant="subtitle1">
+      {location && <Typography fontSize={18}>
       {`at ${location}`}
       </Typography>}
       {description && 
       <Typography
-        variant="body1"
         whiteSpace='nowrap'
         textOverflow={'ellipsis'}
         overflow='hidden'
+        mt={date || location ? 1 : 0}
       >
         {descriptionLines[0]}{descriptionLines.length > 1 ? '...' : ''}
       </Typography>}
@@ -51,16 +85,21 @@ const EventListItem = ({ id, title, date, location, description, imgUrl }: Perfo
         onClick={() => router.push(`event/${id}`)}
         sx={{ flexDirection: { xs: 'column', sm: 'row' } }}
       >
-        <Box flexShrink={0}>
-          <Image
+        <Box
+          display="flex"
+          flex={1}
+          width="100%"
+          maxHeight={300}
+          maxWidth={300}
+          sx={{ aspectRatio: 1 }}
+        >
+          <DateElement
+            date={date || ""}
             src={src}
-            width={175}
-            height={175}
-            objectFit="none"
-            alt={`${title} image`}
+            title={title}
           />
         </Box>
-        <Box flexDirection='column' overflow='hidden' ml={2} maxWidth="100%">
+        <Box display="flex" flex={2} flexDirection='column' alignSelf="start" overflow='hidden' ml={2} maxWidth="100%">
           <ListItemText
             primary={<Typography textAlign={{ xs: 'center', sm: 'start' }} variant="h4">{title}</Typography>}
           />

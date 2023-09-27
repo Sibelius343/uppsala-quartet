@@ -25,7 +25,7 @@ const About: NextPage<AboutProps> = ({ aboutQuartet, performers }) => {
       <Typography variant="h4" my={4}>The Quartet</Typography>
       <AboutQuartetCard id={aboutQuartet.id} picUri="/about-quartet-pic.jpg" text={aboutQuartet?.value || ""} />
       <Typography variant="h4" mt={4} mb={2}>The Performers</Typography>
-      <Typography fontSize={20} color={theme.palette.grey[600]} >Click to find out more:</Typography>
+      <Typography fontSize={20} color={theme.palette.secondary.main} >Click to find out more:</Typography>
       <Grid container columnSpacing={2} rowSpacing={4} justifyContent='center' px={6} py={3}>
         {performers.map(({ id, name, instrument, bio, picUri }) => (
           <Grid item key={id} xs={12} sm={6} md={3} display="flex">

@@ -8,8 +8,9 @@ import advancedFormat from "dayjs/plugin/advancedFormat";
 import { DEFAULT_EVENT_IMAGE_PATH } from "../constants/paths";
 import { useRouter } from "next/router";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPencil } from '@fortawesome/free-solid-svg-icons';
+import { faPencil, faTrash } from '@fortawesome/free-solid-svg-icons';
 import EventForm from "./EventForm";
+import Image from "next/image";
 
 dayjs.extend(advancedFormat);
 
@@ -27,7 +28,6 @@ const EventDetail = ({ id, title, date, location, description, imgUrl } : Perfor
   const handleDialogOpen = () => setDeleteDialogOpen(true);
   const handleDialogClose = () => {
     setDeleteDialogOpen(false);
-    router.push('/events');
   };
 
   const src = imgUrl ? imgUrl : DEFAULT_EVENT_IMAGE_PATH;
@@ -37,42 +37,47 @@ const EventDetail = ({ id, title, date, location, description, imgUrl } : Perfor
   const formattedDate = dayjs(date).format('h:mm A [on] dddd, MMMM Do, YYYY');
 
   return (
-    <Card sx={{ width: '90%', display: 'flex', flexDirection: { xs: 'column', sm: 'row' } }}>
-      <CardMedia
-        component="img"
-        image={src}
-        alt='Quartet pic'
-        sx={{ width: { xs: '100%', sm: '33%' }, aspectRatio: '4/3' }}
-      />
-      <CardContent sx={{ display: 'flex', flexDirection: 'column', flexGrow: 1, justifyContent: 'space-between'}}>
-        <Box>
-          <Box display="flex" justifyContent="space-between">
-            <Typography gutterBottom variant="h4" component="div">
-              {title}
-            </Typography>
-            {(isAdmin && isMounted) && 
-            <IconButton
-              onClick={() => setIsEditEventOpen(true)}
-              sx={{ alignSelf: 'start' }}
-            >
-              <FontAwesomeIcon
-                icon={faPencil}
-                size="sm"
-              />
-            </IconButton>}
-          </Box>
-        {date && <Typography variant="subtitle1">
-          {formattedDate}
-        </Typography>}
-        {location && <span>at <Link href={locationUrl} target='_blank' underline='hover'>
-        {location}
-        </Link></span>}
-        <Typography mt={2} variant="body2" color="text.secondary">
+    <Box sx={{ width: '90%', mt: 2, display: 'flex', flexDirection: "column" }}>
+      <Box
+        display="flex"
+        flexDirection={{ xs: 'column', sm: 'row' }}
+        justifyContent="space-between"
+        width="100%"
+        gap={2}
+      >
+        <Box display="flex" flexDirection="column" flex={1}>
+          <Typography gutterBottom variant="h4" fontWeight="light">
+            {title}
+          </Typography>
+          {date && <Typography variant="subtitle1" mb={1}>
+            {formattedDate}
+          </Typography>}
+          {location && <span>at {location} <Link href={locationUrl} target='_blank' underline='hover'>
+          {"(map)"}
+          </Link></span>}
+        </Box>
+        <Typography flex={2}>
           {description}
         </Typography>
-        </Box>
-        {(isMounted && isAdmin) && <Button onClick={handleDialogOpen} sx={{ alignSelf: 'end' }}>Delete</Button>}
-      </CardContent>
+      </Box>
+      {(isMounted && isAdmin) &&
+      <Box display="flex" alignSelf="end" gap={1}>
+        <IconButton
+          onClick={() => setIsEditEventOpen(true)}
+          sx={{ alignSelf: 'start', width: 37 }}
+        >
+          <FontAwesomeIcon
+            icon={faPencil}
+            size="sm"
+          />
+        </IconButton>
+        <IconButton onClick={handleDialogOpen} sx={{ alignSelf: 'end', width: 37 }}>
+        <FontAwesomeIcon
+          icon={faTrash}
+          size="sm"
+        />
+        </IconButton>
+      </Box>}
       <DeleteEventDialog
         open={deleteDialogOpen}
         handleClose={handleDialogClose}
@@ -100,7 +105,7 @@ const EventDetail = ({ id, title, date, location, description, imgUrl } : Perfor
           />
         </DialogContent>
       </Dialog>
-    </Card>
+    </Box>
   )
 }
 

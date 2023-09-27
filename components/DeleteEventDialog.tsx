@@ -6,6 +6,7 @@ import {
   DialogActions,
   Button
 } from "@mui/material";
+import { useRouter } from "next/router";
 
 interface DeleteEventProps {
   open: boolean,
@@ -15,9 +16,12 @@ interface DeleteEventProps {
 }
 
 const DeleteEventDialog = ({ open, handleClose, id, title }: DeleteEventProps) => {
+  const router = useRouter();
+
   const handleDelete = async () => {
     const response = await fetch(`/api/events/${id}`, { method: 'DELETE' });
     handleClose();
+    router.push("/events");
   }
 
   return (

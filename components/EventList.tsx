@@ -24,6 +24,7 @@ const EventList = ({ events }: EventListProps) => {
         display="flex"
         alignItems="end"
         fontWeight="light"
+        fontSize={30}
         justifyContent={{ xs: "center", sm: "start" }}
         sx={{ height: "75px", width: { xs: "100%", sm: "40%", md: "25%" }, borderBottom: "solid 2px", mb: 2 }}
       >
@@ -43,10 +44,11 @@ const EventList = ({ events }: EventListProps) => {
         </Box>
       ))}
       {pastEvents.length > 0 && <Typography
-        variant="h4"
+        variant="h3"
         display="flex"
         alignItems="end"
         fontWeight="light"
+        fontSize={30}
         justifyContent={{ xs: "center", sm: "start" }}
         sx={{ height: "75px", width: { xs: "100%", sm: "40%", md: "25%" }, borderBottom: "solid 2px", my: 2 }}
       >

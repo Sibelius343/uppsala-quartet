@@ -1,5 +1,7 @@
 import event from "../models/event";
-import dbConnect from "../utils/dbConnect"
+import dbConnect from "../utils/dbConnect";
+import { FilterQuery } from "mongoose";
+import { PerformanceEvent } from "../interfaces/events";
 
 export const loadEvents = async () => {
   await dbConnect();
@@ -14,13 +16,17 @@ export const loadEvents = async () => {
   }
 }
 
-export const loadSingleEvent = async (id: any) => {
+export const loadSingleEvent = async (selectedEventId: any) => {
   await dbConnect();
 
-  if (id) {
+  if (selectedEventId) {
     try {
-      const response = await event.findById(id);
-      return response?.toJSON();
+      const response = await Promise.all([
+        event.findOne({ _id: { $lt: selectedEventId }}, {}, { sort: { _id: -1 } }),
+        event.findOne({ _id: selectedEventId }),
+        event.findOne({ _id: { $gt: selectedEventId }}, {}, { sort: { _id: 1 } })
+      ]);
+      return response.map(e => e?.toJSON() || null);
     } catch (e) {
       console.error(e)
       return null;

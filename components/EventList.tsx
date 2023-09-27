@@ -18,13 +18,14 @@ const EventList = ({ events }: EventListProps) => {
   const pastEvents = sortedEvents.slice(pastEventsIndex < 0 ? sortedEvents.length : pastEventsIndex, sortedEvents.length);
 
   return (
-    <List sx={{width: { xs: '100vw', sm:'90vw' }}}>
+    <List sx={{width: '90vw' }}>
       {upcomingEvents.length > 0 && <Typography
         variant="h4"
         display="flex"
         alignItems="end"
         fontWeight="light"
-        sx={{ height: "75px", width: "25%", borderBottom: "solid 2px" }}
+        justifyContent={{ xs: "center", sm: "start" }}
+        sx={{ height: "75px", width: { xs: "100%", sm: "40%", md: "25%" }, borderBottom: "solid 2px", mb: 2 }}
       >
         Upcoming
       </Typography>}
@@ -46,7 +47,8 @@ const EventList = ({ events }: EventListProps) => {
         display="flex"
         alignItems="end"
         fontWeight="light"
-        sx={{ height: "75px", width: "25%", borderBottom: "solid 2px" }}
+        justifyContent={{ xs: "center", sm: "start" }}
+        sx={{ height: "75px", width: { xs: "100%", sm: "40%", md: "25%" }, borderBottom: "solid 2px", my: 2 }}
       >
         Past
       </Typography>}

@@ -49,10 +49,8 @@ const DateElement = ({ date, src, title }: { date: string, src: string, title: s
 }
 
 const ItemDescription = ({ date, location, description }: ItemDescription) => {
-  const descriptionLines = description ? description.split('\n') : [];
-
   return (
-    <Box display="flex" flexDirection="column" mt={1}>
+    <Box display="flex" flexDirection="column" mt={1} textAlign={{ xs: "center", sm: "start"}}>
       {date && <Typography fontSize={18}>
         {date}
       </Typography>}
@@ -61,12 +59,13 @@ const ItemDescription = ({ date, location, description }: ItemDescription) => {
       </Typography>}
       {description && 
       <Typography
-        whiteSpace='nowrap'
+        display="-webkit-box"
         textOverflow={'ellipsis'}
         overflow='hidden'
         mt={date || location ? 1 : 0}
+        sx={{ WebkitLineClamp: 3, WebkitBoxOrient: "vertical" }}
       >
-        {descriptionLines[0]}{descriptionLines.length > 1 ? '...' : ''}
+        {description}
       </Typography>}
     </Box>
   )

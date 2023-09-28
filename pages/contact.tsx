@@ -1,4 +1,4 @@
-import { Box, Paper, Typography } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import type { NextPage } from "next";
 import Head from "next/head";
 import ContactForm from "../components/ContactForm";
@@ -11,9 +11,9 @@ const Contact: NextPage = () => {
     </Head>
       <Box sx={{display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
         <Typography variant="h2">Contact Us</Typography>
-        <Paper sx={{ width: {xs: '90vw', md: '40vw'}, padding: 2, mt: 2 }}>
+        <Box sx={{ width: {xs: '90vw', md: '40vw'}, padding: 2, mt: 2 }}>
           <ContactForm />
-        </Paper>
+        </Box>
       </Box>
     </>
   )

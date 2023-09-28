@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { Box, Button, ButtonBase, IconButton, ImageList, ImageListItem } from '@mui/material';
-import { Dispatch, SetStateAction, useEffect, useState, MouseEvent, useRef, createRef, RefObject } from 'react';
+import { Dispatch, SetStateAction, useEffect, useState, useRef, createRef, RefObject } from 'react';
 import { UnsplashApiResponse, UnsplashImage } from '../interfaces/images';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircleCheck, faCircleChevronRight, faCircleChevronLeft } from '@fortawesome/free-solid-svg-icons';

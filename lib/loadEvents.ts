@@ -1,7 +1,5 @@
 import event from "../models/event";
 import dbConnect from "../utils/dbConnect";
-import { FilterQuery } from "mongoose";
-import { PerformanceEvent } from "../interfaces/events";
 
 export const loadEvents = async () => {
   await dbConnect();

@@ -1,7 +1,7 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Box, IconButton, TextField } from "@mui/material";
 import useYoutubeVideoData from "../hooks/useYoutubeVideoData";
-import { faSpinner, faCircleXmark, faCircleCheck, faSearch } from '@fortawesome/free-solid-svg-icons';
+import { faSpinner, faSearch } from '@fortawesome/free-solid-svg-icons';
 import { Dispatch, SetStateAction, useState } from "react";
 import { YoutubeVideoItem } from "../interfaces/media";
 

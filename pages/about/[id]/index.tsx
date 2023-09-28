@@ -1,10 +1,7 @@
 import { GetStaticPaths, GetStaticProps, NextPage } from "next";
 import Head from "next/head";
 import { Typography, Button } from "@mui/material";
-import { PerformanceEvent } from "../../../interfaces/events";
-import EventDetail from "../../../components/EventDetail";
 import Link from "next/link";
-import { loadEvents, loadSingleEvent } from "../../../lib/loadEvents";
 import { Performer } from "../../../interfaces/performer";
 import PerformerDetails from "../../../components/PerformerDetails";
 import { loadPerformers, loadSinglePerformer } from "../../../lib/loadPerformers";

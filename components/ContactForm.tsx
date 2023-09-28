@@ -39,6 +39,9 @@ const TextInput = ({ label, rows, ...props }: FieldProps) => {
       fullWidth
       required
       {...field}
+      InputLabelProps={{
+        sx: { color: "black" }
+      }}
       sx={{ display: 'block' }}
     />
   )

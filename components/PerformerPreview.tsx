@@ -1,10 +1,5 @@
-import { Card, CardMedia, CardContent, Typography, Box, IconButton, Dialog, ButtonBase } from "@mui/material"
-import useAdminContext from "../hooks/useAdminContext";
+import { Typography, Box, ButtonBase } from "@mui/material"
 import { Performer } from "../interfaces/performer";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPencil } from '@fortawesome/free-solid-svg-icons';
-import { useEffect, useState } from "react";
-import EditTextForm, { ItemEnum } from "./EditTextForm";
 import Image from "next/image";
 import { useRouter } from "next/router";
 

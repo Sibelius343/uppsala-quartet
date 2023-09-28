@@ -1,6 +1,6 @@
 import type { GetStaticProps, NextPage } from "next";
 import Head from "next/head";
-import { Typography, Grid, Box, useTheme } from '@mui/material';
+import { Typography, Grid, useTheme } from '@mui/material';
 import BioCard from "../../components/PerformerPreview";
 import AboutQuartetCard from "../../components/AboutQuartetCard";
 import { loadPerformers } from "../../lib/loadPerformers";

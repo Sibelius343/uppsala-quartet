@@ -1,4 +1,4 @@
-import { Card, CardContent, Typography, Button, Link, CardMedia, Box, IconButton, Dialog, DialogTitle, DialogContent } from "@mui/material";
+import { Typography, Link, Box, IconButton, Dialog, DialogTitle, DialogContent } from "@mui/material";
 import { useEffect, useState } from "react";
 import useAdminContext from "../hooks/useAdminContext"
 import { PerformanceEvent } from "../interfaces/events"
@@ -10,7 +10,6 @@ import { useRouter } from "next/router";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPencil, faTrash } from '@fortawesome/free-solid-svg-icons';
 import EventForm from "./EventForm";
-import Image from "next/image";
 
 dayjs.extend(advancedFormat);
 

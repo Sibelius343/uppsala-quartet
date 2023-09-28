@@ -1,6 +1,5 @@
-import { Button, ButtonBase, Stack, Typography } from "@mui/material";
+import { Button, Stack, Typography } from "@mui/material";
 import dayjs from "dayjs";
-import Link from "next/link";
 import { useRouter } from "next/router";
 import { PerformanceEvent } from "../interfaces/events";
 

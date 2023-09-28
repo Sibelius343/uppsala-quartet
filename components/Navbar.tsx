@@ -4,7 +4,6 @@ import Link from "next/link";
 import { faBars, faChevronLeft } from '@fortawesome/free-solid-svg-icons';
 import { faFacebook, faYoutube, faInstagram, IconDefinition } from "@fortawesome/free-brands-svg-icons";
 import { useState } from "react";
-import Image from "next/image";
 
 const drawerWidth = 240;
 

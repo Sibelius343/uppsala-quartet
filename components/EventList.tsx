@@ -1,4 +1,4 @@
-import { Divider, List, Box, Typography, Paper } from "@mui/material";
+import { Divider, List, Box, Typography } from "@mui/material";
 import EventListItem from "./EventListItem";
 import { PerformanceEvent } from '../interfaces/events';
 

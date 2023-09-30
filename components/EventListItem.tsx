@@ -23,7 +23,7 @@ const DateElement = ({ date, src, title }: { date: string, src: string, title: s
         src={src}
         fill
         sizes="300px"
-        style={{ objectFit: "cover" }}
+        style={{ objectFit: "cover", borderRadius: "4px" }}
         alt={`${title} image`}
       />
       <Box

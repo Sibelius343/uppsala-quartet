@@ -20,9 +20,8 @@ const PerformerPreview = ({ id, name, instrument, bio, picUri }: Performer) => {
         <Image
           src={picUri}
           alt={`${name} bio`}
-          layout="fill"
-          objectFit="cover"
-          style={{ borderRadius: '4px' }}
+          fill
+          style={{ borderRadius: '4px', objectFit: "cover" }}
         />
       </Box>
       <Typography variant="h5" pt={2}>

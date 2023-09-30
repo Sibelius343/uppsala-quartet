@@ -21,8 +21,8 @@ const DateElement = ({ date, src, title }: { date: string, src: string, title: s
     <Box width="100%" position="relative">
       <Image
         src={src}
-        layout="fill"
-        objectFit="cover"
+        fill
+        style={{ objectFit: "cover" }}
         alt={`${title} image`}
       />
       <Box

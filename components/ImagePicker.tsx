@@ -111,7 +111,7 @@ const ImagePicker = ({ query, selectedImage, setSelectedImage, setExistingImage,
                   alt={image.alt_description}
                   width={150}
                   height={150}
-                  objectFit='cover'
+                  style={{ objectFit: "cover" }}
                 />
                 {clickedImage?.id === image.id && <SelectedOverlay x={x} y={y} width={width} height={height} />}
               </ImageListItem>

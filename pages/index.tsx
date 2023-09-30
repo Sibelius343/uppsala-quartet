@@ -1,6 +1,6 @@
 import type { NextPage } from 'next';
 import Head from 'next/head';
-import Image from 'next/image';
+import Image from 'next/legacy/image'; // using legacy because of some weird objectFit rendering behavior with the new Image component
 import styles from '../styles/Home.module.css';
 import { Box, useMediaQuery, useTheme } from '@mui/material';
 import { useEffect, useState } from 'react';
@@ -33,7 +33,7 @@ const Home: NextPage = () => {
         sx={{ backgroundColor: 'lightgrey', mt: -2 }}
       >
         <Box position="fixed" width="100vw" height="100vh" top={0}>
-          {mounted && <Image src={smallScreen ? "/catena-mobile-background.jpg" : "/quartet-collage.jpg"} alt='Catena background' fill style={{ objectFit: "cover" }} />}
+          {mounted && <Image src={smallScreen ? "/catena-mobile-background.jpg" : "/quartet-collage.jpg"} alt='Catena background' layout='fill' objectFit='cover'/>}
         </Box>
         <Box
           display="flex"

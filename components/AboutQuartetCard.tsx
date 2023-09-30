@@ -27,13 +27,19 @@ const AboutQuartetCard = ({ id, picUri, text }: CardProps) => {
       <Box
         px={{ xs: 3, md: 6 }}
       >
-        <Box sx={{ float: { xs: 'none', sm: 'left' }, mr: 2, textAlign: 'center' }}>
+        <Box sx={{
+          float: { xs: 'none', sm: 'left' },
+          mr: 2,
+          textAlign: 'center',
+          aspectRatio: 4/3,
+          width: { xs: "auto", sm: 400 },
+          position: "relative"
+        }}>
           <Image
             src={picUri}
             alt='Quartet Bio'
-            width={400}
-            height={300}
-            style={{ borderRadius: '4px' }}
+            fill
+            style={{ borderRadius: '4px', objectFit: "cover" }}
           />
         </Box>
         {(isAdmin && isMounted) &&

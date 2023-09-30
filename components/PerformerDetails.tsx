@@ -35,6 +35,7 @@ const PerformerDetails = ({ id, name, instrument, bio, picUri }: Performer) => {
           src={picUri}
           alt={`${name} bio`}
           fill
+          sizes="(max-width: 600px) 100vw, 350px"
           style={{ borderRadius: '4px', objectFit: "cover" }}
         />
       </Box>

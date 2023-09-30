@@ -39,6 +39,7 @@ const AboutQuartetCard = ({ id, picUri, text }: CardProps) => {
             src={picUri}
             alt='Quartet Bio'
             fill
+            sizes="(max-width: 600px) 100vw, 400px"
             style={{ borderRadius: '4px', objectFit: "cover" }}
           />
         </Box>

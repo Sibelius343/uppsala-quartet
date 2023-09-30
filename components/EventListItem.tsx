@@ -22,6 +22,7 @@ const DateElement = ({ date, src, title }: { date: string, src: string, title: s
       <Image
         src={src}
         fill
+        sizes="300px"
         style={{ objectFit: "cover" }}
         alt={`${title} image`}
       />

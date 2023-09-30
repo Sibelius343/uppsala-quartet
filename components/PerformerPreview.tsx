@@ -21,6 +21,7 @@ const PerformerPreview = ({ id, name, instrument, bio, picUri }: Performer) => {
           src={picUri}
           alt={`${name} bio`}
           fill
+          sizes="(max-width: 600px) 100vw, (max-width: 900px) 50vw, 25vw"
           style={{ borderRadius: '4px', objectFit: "cover" }}
         />
       </Box>

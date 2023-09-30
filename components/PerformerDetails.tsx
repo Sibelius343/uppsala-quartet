@@ -34,9 +34,8 @@ const PerformerDetails = ({ id, name, instrument, bio, picUri }: Performer) => {
         <Image
           src={picUri}
           alt={`${name} bio`}
-          layout="fill"
-          objectFit="cover"
-          style={{ borderRadius: '4px' }}
+          fill
+          style={{ borderRadius: '4px', objectFit: "cover" }}
         />
       </Box>
       {(isAdmin && isMounted) &&

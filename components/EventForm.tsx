@@ -145,9 +145,9 @@ const EventForm = ({ handleNavigate, id, title = '', date = '', location = '', d
           />
           <Box sx={{ display: 'flex', gap: 2 }}>
             {existingImgUrl ?
-            <Image src={existingImgUrl} alt={'Event Image'} width={150} height={150} objectFit='cover' /> :
+            <Image src={existingImgUrl} alt={'Event Image'} width={150} height={150} style={{ objectFit: "cover" }} /> :
             selectedPhoto ?
-            <Image src={selectedPhoto.urls.small} alt={'Event Image'} width={150} height={150} objectFit='cover' /> :
+            <Image src={selectedPhoto.urls.small} alt={'Event Image'} width={150} height={150} style={{ objectFit: "cover" }} /> :
             <FontAwesomeIcon icon={faImage} size="10x" color='#d4d4d4' />}
             <Box sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', gap: 2 }} >
 

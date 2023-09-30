@@ -27,7 +27,8 @@ const drawerButtonStyle: SxProps<Theme> = {
   justifyContent: 'start',
   pl: 3,
   color: "white",
-  fontSize: 16
+  fontSize: 16,
+  width: "100%"
 }
 
 const navBarButtonStyle: SxProps<Theme> = {

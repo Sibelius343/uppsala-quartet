@@ -26,11 +26,13 @@ interface DrawerButtonProps {
 const drawerButtonStyle: SxProps<Theme> = {
   justifyContent: 'start',
   pl: 3,
-  color: "white"
+  color: "white",
+  fontSize: 16
 }
 
 const navBarButtonStyle: SxProps<Theme> = {
-  color: "white"
+  color: "white",
+  fontSize: 16
 }
 
 const NavButton = ({ navItem, handleClick, isDrawerButton }: DrawerButtonProps) => {
@@ -79,8 +81,6 @@ const HideOnScroll: React.FC<HideOnScrollProps> = ({ children }) => {
 }
 
 const NavLogo = () => {
-  const theme = useTheme();
-
   return (
     <Link href="/" passHref>
       <Box display="flex" flexDirection="row" alignItems="center" gap={4} sx={{ ":hover": { cursor: 'pointer' } }}>
@@ -126,7 +126,7 @@ const Navbar = () => {
             <Box display="flex" width="100%">
               <NavLogo />
               <Box display="flex" flex={1} />
-              <Box display="flex" gap={5} alignItems="center">
+              <Box display="flex" gap={4} alignItems="center">
               {['home', 'about', 'events', 'media', 'contact'].map(e => (
                 <NavButton
                   key={e}

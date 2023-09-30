@@ -8,7 +8,10 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import NotificationContext from '../context/NotificationContext'
 import useLocalStorage from '../hooks/useLocalStorage'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
-import { createTheme, ThemeProvider } from '@mui/material'
+import { createTheme, ThemeProvider } from '@mui/material';
+import { Quicksand } from "next/font/google";
+
+const quicksand = Quicksand({ subsets: ["latin"] })
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -27,6 +30,9 @@ const theme = createTheme({
     secondary: {
       main: "#5c5c5c"
     }
+  },
+  typography: {
+    fontFamily: quicksand.style.fontFamily
   }
 })
 

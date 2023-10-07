@@ -12,18 +12,18 @@ const EventNavLink = ({ event, previous = false }: EventNavLinkProps) => {
   const router = useRouter();
 
   const handleClick = () => {
-    router.push(`/event/${event.id}`);
+    router.push(`/events/${event.id}`);
   };
 
   const formattedDate = dayjs(event.date).format('MMMM D');
 
   return (
-    <Button onClick={handleClick} color="secondary">
+    <Button onClick={handleClick} color="secondary" sx={{ px: 0 }}>
       <Stack sx={{ textAlign: previous ? "start" : "end" }} gap={1}>
-        <Typography fontSize={13}>
+        <Typography fontSize={{ xs: 13, sm: 15}}>
           {`${previous ? "Previous Event:" : "Next Event:"} ${formattedDate}`}
         </Typography>
-        <Typography fontSize={13}>
+        <Typography fontSize={{ xs: 13, sm: 15}}>
           {event.title}
         </Typography>
       </Stack>

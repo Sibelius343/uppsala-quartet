@@ -21,7 +21,7 @@ const AdminLoginForm = ({ handleClose }: AdminLoginFormProps) => {
   const handleLogin = async (event: React.ChangeEvent<HTMLInputElement>) => {
     event.preventDefault();
     
-    const response = await fetch('api/login', {
+    const response = await fetch('/api/login', {
       method: 'post',
       body: JSON.stringify({ password: passwordInput })
     });

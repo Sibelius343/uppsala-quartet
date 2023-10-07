@@ -1,16 +1,20 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { AppBar, Box, Button, Divider, Drawer, IconButton, Slide, styled, SxProps, Theme, Toolbar, Typography, useMediaQuery, useScrollTrigger, useTheme } from "@mui/material";
+import { AppBar, Box, Button, ButtonProps, Divider, Drawer, IconButton, Slide, styled, SxProps, Theme, Toolbar, Typography, useMediaQuery, useScrollTrigger, useTheme } from "@mui/material";
 import Link from "next/link";
 import { faBars, faChevronLeft } from '@fortawesome/free-solid-svg-icons';
 import { faFacebook, faYoutube, faInstagram, IconDefinition } from "@fortawesome/free-brands-svg-icons";
 import { useState } from "react";
+import { useRouter } from "next/router";
 
 const drawerWidth = 240;
 
 const navStyle: SxProps<Theme> = {
   display: 'flex',
   flexDirection: 'row',
-  backgroundColor: '#000000a3'
+  alignItems: "end",
+  pb: 2.5,
+  backgroundColor: '#000000a3',
+  height: "100px"
 };
 
 interface HideOnScrollProps {
@@ -23,25 +27,33 @@ interface DrawerButtonProps {
   isDrawerButton?: boolean;
 }
 
-const drawerButtonStyle: SxProps<Theme> = {
-  justifyContent: 'start',
-  pl: 3,
-  color: "white",
-  fontSize: 16,
-  width: "100%"
+interface BorderButtonProps extends ButtonProps {
+  isSelected: boolean;
+  isDrawerButton: boolean | undefined;
 }
 
-const navBarButtonStyle: SxProps<Theme> = {
-  color: "white",
-  fontSize: 16
-}
+const BorderButton = styled(Button, {
+  shouldForwardProp: (prop) => prop !== "isDrawerButton" && prop !== "isSelected"
+})<BorderButtonProps>(({ isDrawerButton, isSelected }) => ({
+    color: "white",
+    fontSize: 16,
+    justifyContent: isDrawerButton ? "start" : "",
+    pl: isDrawerButton ? 3 : 0,
+    width: isDrawerButton ? "100%" : "",
+    borderRadius: 0,
+    borderBottom: isSelected && !isDrawerButton ? "2px solid white" : "",
+    borderLeft: isSelected && isDrawerButton ? "2px solid white" : ""
+  }));
 
-const NavButton = ({ navItem, handleClick, isDrawerButton }: DrawerButtonProps) => {
+const NavButton = ({ navItem, handleClick, isDrawerButton }: DrawerButtonProps) => {  
+  const router = useRouter();
+  const truncatedPath = router.pathname.slice(0, router.pathname.lastIndexOf("/") || router.pathname.length);
   const path = navItem === 'home' ? '/' : `/${navItem}`;
+  const isSelected = path === truncatedPath;
 
   return (
     <Link href={path} passHref>
-      <Button sx={isDrawerButton ? drawerButtonStyle : navBarButtonStyle} onClick={handleClick}>{navItem}</Button>
+      <BorderButton isDrawerButton={isDrawerButton} isSelected={isSelected} onClick={handleClick}>{navItem}</BorderButton>
     </Link>
   )
 }
@@ -51,7 +63,7 @@ interface SocialIconProps {
   socialAddress: string;
 }
 
-const SocialButton = ({ icon, socialAddress }: SocialIconProps) => {
+export const SocialButton = ({ icon, socialAddress }: SocialIconProps) => {
   return (
     <a href={socialAddress} target="_blank" rel="noreferrer">
       <IconButton sx={{ width: "40px", color: "white" }}>
@@ -68,7 +80,8 @@ const DrawerHeader = styled('div')(({ theme }) => ({
   // necessary for content to be below app bar
   ...theme.mixins.toolbar,
   justifyContent: 'flex-end',
-  backgroundColor: "black"
+  backgroundColor: "black",
+  height: "100px"
 }));
 
 const HideOnScroll: React.FC<HideOnScrollProps> = ({ children }) => {
@@ -85,7 +98,7 @@ const NavLogo = () => {
   return (
     <Link href="/" passHref>
       <Box display="flex" flexDirection="row" alignItems="center" gap={4} sx={{ ":hover": { cursor: 'pointer' } }}>
-        <Typography color="white" fontSize="1.5rem" fontWeight={100} noWrap overflow="visible">
+        <Typography color="white" fontSize={{ xs: "1.5rem", sm: "2rem" }} fontWeight={100} noWrap overflow="visible">
           Catena String Quartet
         </Typography>
       </Box>
@@ -114,7 +127,7 @@ const Navbar = () => {
             {smallScreen ?
             <Box display="flex">
               <IconButton
-                sx={{ display: drawerOpen ? 'none' : '', width: '40px', mr: 2 }}
+                sx={{ width: '40px', mr: 2 }}
                 onClick={handleDrawerOpen}
               >
                 <FontAwesomeIcon
@@ -124,17 +137,17 @@ const Navbar = () => {
               </IconButton>
               <NavLogo />
             </Box> :
-            <Box display="flex" width="100%">
+            <Box display="flex" width="100%" alignItems="end">
               <NavLogo />
               <Box display="flex" flex={1} />
-              <Box display="flex" gap={4} alignItems="center">
+              <Box display="flex" gap={4} alignItems="end">
               {['home', 'about', 'events', 'media', 'contact'].map(e => (
                 <NavButton
                   key={e}
                   navItem={e}
                 />
               ))}
-              <Box>
+              <Box display={{ xs: "none", lg: "block" }}>
                 <SocialButton icon={faFacebook} socialAddress="https://www.facebook.com/CatenaStringQuartet" />
                 <SocialButton icon={faInstagram} socialAddress="https://www.instagram.com/catenastringquartet/"/>
                 <SocialButton icon={faYoutube} socialAddress="https://www.youtube.com/@CatenaStringQuartet" />
@@ -144,7 +157,7 @@ const Navbar = () => {
           </Toolbar>
         </AppBar>
       </HideOnScroll>
-      <Toolbar />
+      <Toolbar sx={{ height: "100px" }} />
       <Drawer
         open={drawerOpen}
         sx={{
@@ -177,8 +190,7 @@ const Navbar = () => {
           />
         ))}
         </Box>
-        <Box display="flex" flex={1} />
-        <Box display="flex" flexDirection="row" justifyContent="space-evenly" mb={1}>
+        <Box display="flex" flexDirection="row" justifyContent="start" gap={2} mb={1}>
           <SocialButton icon={faFacebook} socialAddress="https://www.facebook.com/CatenaStringQuartet" />
           <SocialButton icon={faInstagram} socialAddress="https://www.instagram.com/catenastringquartet/"/>
           <SocialButton icon={faYoutube} socialAddress="https://www.youtube.com/@CatenaStringQuartet" />

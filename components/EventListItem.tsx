@@ -82,7 +82,7 @@ const EventListItem = ({ id, title, date, location, description, imgUrl }: Perfo
   return (
     <ListItem>
       <ListItemButton
-        onClick={() => router.push(`event/${id}`)}
+        onClick={() => router.push(`events/${id}`)}
         sx={{ flexDirection: { xs: 'column', sm: 'row' } }}
       >
         <Box

@@ -1,9 +1,11 @@
-import { Box, Button, Dialog, useTheme } from "@mui/material"
+import { Box, Button, Dialog, Typography, useTheme } from "@mui/material"
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react"
 import useAdminContext from "../hooks/useAdminContext";
 import useLocalStorage from "../hooks/useLocalStorage";
 import AdminLoginForm from "./AdminLoginForm";
+import { SocialButton } from "./Navbar";
+import { faFacebook, faYoutube, faInstagram } from "@fortawesome/free-brands-svg-icons";
 
 const Footer = () => {
   const theme = useTheme()
@@ -26,30 +28,40 @@ const Footer = () => {
   }, [])
 
   return (
-    <Box sx={{ display: 'flex', justifyContent: 'end', backgroundColor: '#f0f0f0' }}>
-      {mounted && (isAdmin ?
-      <Button
-        onClick={handleLogout}
-        color='error'
-        size="small"
+    <Box sx={{ display: 'flex', alignItems: "center", height: "100px", width: "100%", px: 2, backgroundColor: '#212121' }}>
+      <Box>
+        <SocialButton icon={faFacebook} socialAddress="https://www.facebook.com/CatenaStringQuartet" />
+        <SocialButton icon={faInstagram} socialAddress="https://www.instagram.com/catenastringquartet/"/>
+        <SocialButton icon={faYoutube} socialAddress="https://www.youtube.com/@CatenaStringQuartet" />
+      </Box>
+      <Box display="flex" flex={1} justifyContent="center" textAlign="center">
+        <Typography fontStyle="italic" color="grey.500" fontSize={{xs: 12, sm: 14 }}>Website by Sam Schoenwald</Typography>
+      </Box>
+      <Box sx={{ display: 'flex', justifyContent: 'end', alignItems: "end" }}>
+        {mounted && (isAdmin ?
+        <Button
+          onClick={handleLogout}
+          color='error'
+          size="small"
+        >
+          Logout
+        </Button> :
+        <Button
+          onClick={() => setLoginDialogOpen(true)}
+          size="small"
+          sx={{ color: theme.palette.grey[100] }}
+        >
+          Quartet Login
+        </Button>)}
+        <Dialog
+        open={isLoginDialogOpen}
+        onClose={() => setLoginDialogOpen(false)}
       >
-        Logout
-      </Button> :
-      <Button
-        onClick={() => setLoginDialogOpen(true)}
-        size="small"
-        sx={{ color: isHomePage ? theme.palette.grey[100] : theme.palette.grey[700] }}
-      >
-        Quartet Login
-      </Button>)}
-      <Dialog
-      open={isLoginDialogOpen}
-      onClose={() => setLoginDialogOpen(false)}
-    >
-      <AdminLoginForm
-        handleClose={() => setLoginDialogOpen(false)}
-      />
-      </Dialog>
+        <AdminLoginForm
+          handleClose={() => setLoginDialogOpen(false)}
+        />
+        </Dialog>
+      </Box>
     </Box>
   )
 }

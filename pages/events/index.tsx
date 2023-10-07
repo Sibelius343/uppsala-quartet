@@ -2,10 +2,10 @@ import { GetStaticProps, NextPage } from "next";
 import Link from "next/link";
 import Head from "next/head";
 import { Button, Typography } from "@mui/material";
-import EventList from "../components/EventList";
-import { EventObject } from "../interfaces/events";
-import useAdminContext from "../hooks/useAdminContext";
-import { loadEvents } from "../lib/loadEvents";
+import EventList from "../../components/EventList";
+import { EventObject } from "../../interfaces/events";
+import useAdminContext from "../../hooks/useAdminContext";
+import { loadEvents } from "../../lib/loadEvents";
 import { useEffect, useState } from "react";
 
 const Events: NextPage<EventObject> = ({ events }) => {

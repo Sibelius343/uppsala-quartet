@@ -41,7 +41,7 @@ const Event: NextPage<EventPageProps> = ({ events }) => {
         description={event.description}
         imgUrl={event.imgUrl}
       />}
-      <Box width="90%" display="flex" mt={2}>
+      <Box width="90%" display="flex" mt={6}>
         {previousEvent && <EventNavLink
           event={previousEvent}
           previous

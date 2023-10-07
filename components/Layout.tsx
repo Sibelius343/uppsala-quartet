@@ -12,7 +12,7 @@ const layoutStyle: SxProps<Theme> = {
   flexDirection: 'column',
   justifyContent: 'start',
   alignItems: 'center',
-  minHeight: 'calc(100vh - 94.75px)',
+  minHeight: 'calc(100vh - 200px)',
   pt: 2,
   backgroundColor: '#e5e5e5'
 }
@@ -21,7 +21,7 @@ const Layout = ({ children }: LayoutProps) => {
   return (
     <>
       <Navbar />
-      <Box position='absolute' top={0} left={0} height={64} width="100%" sx={{ backgroundColor: '#e5e5e5' }} />
+      <Box position='absolute' top={0} left={0} height={100} width="100%" sx={{ backgroundColor: '#e5e5e5' }} />
       <Box sx={layoutStyle}>
         {children}
       </Box>

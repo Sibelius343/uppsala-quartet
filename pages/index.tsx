@@ -29,6 +29,7 @@ const Home: NextPage = () => {
         justifyContent={"center"}
         alignItems='center'
         width='100vw'
+        maxHeight="calc(100vh - 100px)"
         sx={{ backgroundColor: 'lightgrey', mt: -2 }}
       >
         <Box width="100vw" height="calc(100vh - 100px)" top={0}>

@@ -1,4 +1,5 @@
 import { Box, SxProps, Theme } from '@mui/material';
+import { useEffect, useState } from 'react';
 import Footer from './Footer';
 import Navbar from './Navbar';
 import NotificationSnackbar from './NotificationSnackbar';
@@ -7,17 +8,24 @@ interface LayoutProps {
   children: React.ReactNode;
 }
 
-const layoutStyle: SxProps<Theme> = {
-  display: 'flex',
-  flexDirection: 'column',
-  justifyContent: 'start',
-  alignItems: 'center',
-  minHeight: 'calc(100vh - 200px)',
-  pt: 2,
-  backgroundColor: '#e5e5e5'
-}
-
 const Layout = ({ children }: LayoutProps) => {
+  const [mounted, setMounted] = useState(false);
+  // Using this method for determining height because vh is busted on mobile devices
+  const height = mounted ? `${window.innerHeight}px` : "100vh";
+  const layoutStyle: SxProps<Theme> = {
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'start',
+    alignItems: 'center',
+    minHeight: `calc(${height} - 200px)`,
+    pt: 2,
+    backgroundColor: '#e5e5e5'
+  }
+
+  useEffect(() => {
+    setMounted(true)
+  }, [])
+
   return (
     <>
       <Navbar />

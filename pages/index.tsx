@@ -10,6 +10,9 @@ const Home: NextPage = () => {
   const smallScreen = useMediaQuery(theme.breakpoints.down('md'));
   const [mounted, setMounted] = useState(false);
 
+  // Using this method for determining height because vh is busted on mobile devices
+  const height = mounted ? `${window.innerHeight}px` : "100vh";
+
   const logoDimension = 350;
 
   useEffect(() => {
@@ -29,10 +32,9 @@ const Home: NextPage = () => {
         justifyContent={"center"}
         alignItems='center'
         width='100vw'
-        maxHeight="calc(100vh - 100px)"
         sx={{ backgroundColor: 'lightgrey', mt: -2 }}
       >
-        <Box width="100vw" height="calc(100vh - 100px)" top={0}>
+        <Box width="100vw" height={`calc(${height} - 100px)`} top={0}>
           {mounted && <Image src={smallScreen ? "/catena-mobile-background.jpg" : "/quartet-collage.jpg"} alt='Catena background' layout='fill' objectFit='cover'/>}
         </Box>
         <Box

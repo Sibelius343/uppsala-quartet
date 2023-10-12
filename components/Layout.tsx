@@ -18,7 +18,7 @@ const Layout = ({ children }: LayoutProps) => {
     justifyContent: 'start',
     alignItems: 'center',
     minHeight: `calc(${height} - 200px)`,
-    pt: 2,
+    pt: window.location.pathname === "/" ? 0 : 2,
     backgroundColor: '#e5e5e5'
   }
 

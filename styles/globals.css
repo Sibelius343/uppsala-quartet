@@ -19,7 +19,3 @@ a {
   height: 100vh;
   height: 100dvh;
 }
-
-.gradient {
-  background:linear-gradient(to bottom, rgba(0,0,0,0) 20%, rgba(0,0,0,1));
-}

@@ -28,7 +28,7 @@ const Footer = () => {
   }, [])
 
   return (
-    <Box sx={{ display: 'flex', alignItems: "center", height: "100px", width: "100%", px: 2, backgroundColor: '#212121', top: onHomePage ? "100vh" : "", position: onHomePage ? "absolute" : "static" }}>
+    <Box sx={{ display: 'flex', alignItems: "center", height: "100px", width: "100%", px: 2, backgroundColor: '#212121' }}>
       <Box>
         <SocialButton icon={faFacebook} socialAddress="https://www.facebook.com/CatenaStringQuartet" />
         <SocialButton icon={faInstagram} socialAddress="https://www.instagram.com/catenastringquartet/"/>

@@ -2,6 +2,7 @@ import { Box, Button, Dialog, DialogContent, DialogTitle, Divider, Typography } 
 import type { GetStaticProps, NextPage } from "next";
 import Head from "next/head";
 import { useEffect, useState } from "react";
+import ImageHeader from "../components/ImageHeader";
 import MediaVideoItem from "../components/MediaVideoItem";
 import VideoForm from "../components/VideoForm";
 import useAdminContext from "../hooks/useAdminContext";
@@ -22,7 +23,7 @@ const Media: NextPage<MediaObject> = ({ videos }) => {
       <Head>
         <title>Media</title>
       </Head>
-      <Typography mb={4} variant="h2">Media</Typography>
+      <ImageHeader image="/media-header-image.jpg" text="Media" />
       {videos.map((v, i) => (
         <Box key={v.videoId}>
           <MediaVideoItem video={v} />

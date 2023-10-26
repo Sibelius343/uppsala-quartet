@@ -15,8 +15,6 @@ const Footer = () => {
   const router = useRouter();
   const [mounted, setMounted] = useState(false);
 
-  const isHomePage = router.pathname === '/';
-
   const handleLogout = () => {
     setLocalValue(false);
     setIsAdmin(false);
@@ -34,8 +32,19 @@ const Footer = () => {
         <SocialButton icon={faInstagram} socialAddress="https://www.instagram.com/catenastringquartet/"/>
         <SocialButton icon={faYoutube} socialAddress="https://www.youtube.com/@CatenaStringQuartet" />
       </Box>
-      <Box display="flex" flex={1} justifyContent="center" textAlign="center">
-        <Typography fontStyle="italic" color="grey.500" fontSize={{xs: 12, sm: 14 }}>Website by Sam Schoenwald</Typography>
+      <Box display="flex" flex={1} justifyContent="center" textAlign="start">
+        <Box>
+          <Box display="flex" alignItems="center" mb={0.5}>
+            <Typography fontStyle="italic" color="grey.500" fontSize={{xs: 12, sm: 14 }} mr={0.5}>
+              Photos by Caroline Ellingboe
+            </Typography>
+            <Box display="flex" sx={{ flexWrap: "wrap" }}>
+              <SocialButton icon={faFacebook} socialAddress="https://www.facebook.com/ellingboephoto/" small />
+              <SocialButton icon={faInstagram} socialAddress="https://www.instagram.com/ellingboephoto/" small />
+            </Box>
+          </Box>
+          <Typography fontStyle="italic" color="grey.500" fontSize={{xs: 12, sm: 14 }}>Website by Sam Schoenwald</Typography>
+        </Box>
       </Box>
       <Box sx={{ display: 'flex', justifyContent: 'end', alignItems: "end" }}>
         {mounted && (isAdmin ?
@@ -51,7 +60,7 @@ const Footer = () => {
           size="small"
           sx={{ color: theme.palette.grey[100] }}
         >
-          Quartet Login
+          Login
         </Button>)}
         <Dialog
         open={isLoginDialogOpen}

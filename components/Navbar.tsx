@@ -48,7 +48,7 @@ const BorderButton = styled(Button, {
 const NavButton = ({ navItem, handleClick, isDrawerButton }: DrawerButtonProps) => {  
   const router = useRouter();
   const truncatedPath = router.pathname.slice(0, router.pathname.lastIndexOf("/") || router.pathname.length);
-  const path = navItem === 'home' ? '/' : `/${navItem}`;
+  const path = `/${navItem}`;
   const isSelected = path === truncatedPath;
 
   return (
@@ -61,13 +61,14 @@ const NavButton = ({ navItem, handleClick, isDrawerButton }: DrawerButtonProps) 
 interface SocialIconProps {
   icon: IconDefinition;
   socialAddress: string;
+  small?: boolean;
 }
 
-export const SocialButton = ({ icon, socialAddress }: SocialIconProps) => {
+export const SocialButton = ({ icon, socialAddress, small = false }: SocialIconProps) => {
   return (
     <a href={socialAddress} target="_blank" rel="noreferrer">
-      <IconButton sx={{ width: "40px", color: "white" }}>
-        <FontAwesomeIcon icon={icon} />
+      <IconButton sx={{ width: small ? "25px" : "40px", height: small ? "25px" : "40px", color: "white" }}>
+        <FontAwesomeIcon icon={icon} size={small ? "xs" : undefined} />
       </IconButton>
     </a>
   )
@@ -141,7 +142,7 @@ const Navbar = () => {
               <NavLogo />
               <Box display="flex" flex={1} />
               <Box display="flex" gap={4} alignItems="end">
-              {['home', 'about', 'events', 'media', 'contact'].map(e => (
+              {['about', 'events', 'media', 'contact'].map(e => (
                 <NavButton
                   key={e}
                   navItem={e}
@@ -157,7 +158,6 @@ const Navbar = () => {
           </Toolbar>
         </AppBar>
       </HideOnScroll>
-      <Toolbar sx={{ height: "100px" }} />
       <Drawer
         open={drawerOpen}
         sx={{

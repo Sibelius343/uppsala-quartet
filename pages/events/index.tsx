@@ -7,6 +7,7 @@ import { EventObject } from "../../interfaces/events";
 import useAdminContext from "../../hooks/useAdminContext";
 import { loadEvents } from "../../lib/loadEvents";
 import { useEffect, useState } from "react";
+import ImageHeader from "../../components/ImageHeader";
 
 const Events: NextPage<EventObject> = ({ events }) => {
   const { isAdmin } = useAdminContext();
@@ -21,7 +22,7 @@ const Events: NextPage<EventObject> = ({ events }) => {
       <Head>
         <title>Events</title>
       </Head>
-      <Typography variant="h2">Events</Typography>
+      <ImageHeader image="/events-header-image.jpg" text="Events" />
       <EventList
         events={events}
       />

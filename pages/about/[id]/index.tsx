@@ -5,6 +5,7 @@ import Link from "next/link";
 import { Performer } from "../../../interfaces/performer";
 import PerformerDetails from "../../../components/PerformerDetails";
 import { loadPerformers, loadSinglePerformer } from "../../../lib/loadPerformers";
+import ImageHeader from "../../../components/ImageHeader";
 
 interface BioProps {
   performer: Performer;
@@ -16,7 +17,7 @@ const Bio: NextPage<BioProps> = ({ performer }) => {
       <Head>
         <title>{`About ${performer.name}`}</title>
       </Head>
-      <Typography textAlign="center" variant="h2" mb={2}>{`About ${performer.name}`}</Typography>
+      <ImageHeader image="/about-quartet-header-image.jpg" text={`About\n${performer.name}`} />
       <PerformerDetails
         {...performer}
       />

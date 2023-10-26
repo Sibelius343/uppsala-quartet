@@ -10,16 +10,15 @@ interface LayoutProps {
 
 const Layout = ({ children }: LayoutProps) => {
   const [mounted, setMounted] = useState(false);
-  // Using this method for determining height because vh is busted on mobile devices
-  const height = mounted ? `${window.innerHeight}px` : "100vh";
+
   const layoutStyle: SxProps<Theme> = {
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'start',
     alignItems: 'center',
-    minHeight: `calc(${height} - 200px)`,
-    pt: 2,
-    backgroundColor: '#e5e5e5'
+    minHeight: 'calc(100vh - 200px)',
+    backgroundColor: '#e5e5e5',
+    pb: (mounted && window.location.pathname === "/") ? 0 : 5
   }
 
   useEffect(() => {
@@ -29,7 +28,6 @@ const Layout = ({ children }: LayoutProps) => {
   return (
     <>
       <Navbar />
-      <Box position='absolute' top={0} left={0} height={100} width="100%" sx={{ backgroundColor: '#e5e5e5' }} />
       <Box sx={layoutStyle}>
         {children}
       </Box>

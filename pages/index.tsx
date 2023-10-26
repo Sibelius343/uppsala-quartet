@@ -10,10 +10,7 @@ const Home: NextPage = () => {
   const smallScreen = useMediaQuery(theme.breakpoints.down('md'));
   const [mounted, setMounted] = useState(false);
 
-  // Using this method for determining height because vh is busted on mobile devices
-  const height = mounted ? `${window.innerHeight}px` : "100vh";
-
-  const logoDimension = 350;
+  const logoDimension = smallScreen ? 350 : 250;
 
   useEffect(() => {
     setMounted(true);
@@ -32,14 +29,16 @@ const Home: NextPage = () => {
         justifyContent={"center"}
         alignItems='center'
         width='100vw'
-        sx={{ backgroundColor: 'lightgrey', mt: -2 }}
+        sx={{ backgroundColor: 'lightgrey' }}
       >
-        <Box width="100vw" height={`calc(${height} - 100px)`} top={0}>
-          {mounted && <Image src={smallScreen ? "/catena-mobile-background.jpg" : "/quartet-collage.jpg"} alt='Catena background' layout='fill' objectFit='cover'/>}
+        <Box component={"div"} width="100vw" className='home-cover-image' top={0}>
+          {mounted && <Image src={smallScreen ? "/catena-mobile-background.jpg" : "/home-page-cover-image.jpg"} alt='Catena background' layout='fill' objectFit='cover'/>}
+          <Box position="absolute" top={0} width="100%" height="100%" sx={{ background:"linear-gradient(to bottom, rgba(0,0,0,0) 60%, rgba(0, 0,0,0.66), rgba(0,0,0,1))"}} />
         </Box>
         <Box
           position={ "absolute" }
-          top={smallScreen ? `calc(50vh - ${logoDimension / 2}px)` : "calc(100vh*.54)"}
+          top={smallScreen ? `calc(50vh - ${logoDimension / 2}px)` : "calc(100vh - 240px)"}
+          left={smallScreen ? "" : -10}
         >
         {mounted && <Image src={'/catena_logo_white.png'} alt='Catena logo' height={logoDimension} width={logoDimension} style={{ zIndex: 2 }} priority />}
         </Box>

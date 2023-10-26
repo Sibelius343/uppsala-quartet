@@ -24,16 +24,15 @@ const AboutQuartetCard = ({ id, picUri, text }: CardProps) => {
 
   return (
     <>
-      <Box
-        px={{ xs: 3, md: 6 }}
-      >
+      <Box>
         <Box sx={{
-          float: { xs: 'none', sm: 'left' },
-          mr: 2,
+          float: { xs: 'none', md: 'left' },
+          mr: { xs: 0, md: 2 },
           textAlign: 'center',
-          aspectRatio: 4/3,
-          width: { xs: "auto", sm: 400 },
-          position: "relative"
+          aspectRatio: 5253/3752,
+          width: { xs: "auto", md: 600 },
+          position: "relative",
+          mb: { xs: 2, md: 0}
         }}>
           <Image
             src={picUri}

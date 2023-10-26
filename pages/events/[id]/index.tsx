@@ -8,6 +8,7 @@ import { loadEvents, loadSingleEvent } from "../../../lib/loadEvents";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import EventNavLink from "../../../components/EventNavLink";
+import ImageHeader from "../../../components/ImageHeader";
 
 interface EventPageProps {
   events: (PerformanceEvent | null)[];
@@ -21,7 +22,7 @@ const Event: NextPage<EventPageProps> = ({ events }) => {
       <Head>
         <title>{event?.title}</title>
       </Head>
-      <Typography variant="h2" mb={2}>Event Details</Typography>
+      <ImageHeader image="/events-header-image.jpg" text="Event Details" />
       <Box width="90%">
         <Link href={'/events'} passHref>
           <Button

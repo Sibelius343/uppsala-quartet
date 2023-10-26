@@ -29,7 +29,7 @@ const Home: NextPage = () => {
         justifyContent={"center"}
         alignItems='center'
         width='100%'
-        sx={{ backgroundColor: 'lightgrey' }}
+        sx={{ backgroundColor: 'black' }}
       >
         <Box component={"div"} width="100%" top={0}>
           {mounted && <Image src={smallScreen ? "/catena-mobile-background.jpg" : "/home-page-cover-image.jpg"} alt='Catena background' layout='fill' objectFit='cover'/>}

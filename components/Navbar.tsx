@@ -181,7 +181,7 @@ const Navbar = () => {
         </DrawerHeader>
         <Divider sx={{ backgroundColor: "#4b4b4b" }} />
         <Box display='flex' flexDirection="column" gap={1} py={1}>
-        {['home', 'about', 'events', 'media', 'contact'].map(e => (
+        {['about', 'events', 'media', 'contact'].map(e => (
           <NavButton
             key={e}
             navItem={e}

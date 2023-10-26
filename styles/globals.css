@@ -29,3 +29,8 @@ a {
   top: calc(100svh - 240px);
   left: -10px;
 }
+
+.layout-min-height {
+  min-height: calc(100vh - 100px);
+  min-height: calc(100svh - 100px);
+}

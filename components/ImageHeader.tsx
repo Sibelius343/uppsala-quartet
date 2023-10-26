@@ -10,9 +10,9 @@ const ImageHeader = ({ image, text }: ImageHeaderProps) => {
   return (
     <Box
       width="100%"
-      height={500}
       position="relative"
       mb={5}
+      sx={{ aspectRatio: 4 / 3, maxHeight: "66vh" }}
     >
       <Image
         src={image}

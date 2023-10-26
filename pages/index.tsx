@@ -36,9 +36,9 @@ const Home: NextPage = () => {
           <Box position="absolute" top={0} width="100%" height="100%" sx={{ background:"linear-gradient(to bottom, rgba(0,0,0,0) 60%, rgba(0, 0,0,0.66), rgba(0,0,0,1))"}} />
         </Box>
         <Box
+          component="div"
           position={ "absolute" }
-          top={smallScreen ? `calc(50vh - ${logoDimension / 2}px)` : "calc(100vh - 240px)"}
-          left={smallScreen ? "" : -10}
+          className={smallScreen ? "home-cover-logo-small-screen" : "home-cover-logo"}
         >
         {mounted && <Image src={'/catena_logo_white.png'} alt='Catena logo' height={logoDimension} width={logoDimension} style={{ zIndex: 2 }} priority />}
         </Box>

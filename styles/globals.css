@@ -19,3 +19,13 @@ a {
   height: 100vh;
   height: 100svh;
 }
+
+.home-cover-logo-small-screen {
+  top: calc(50vh - 175px);
+}
+
+.home-cover-logo {
+  top: calc(100vh - 240px);
+  top: calc(100svh - 240px);
+  left: -10px;
+}

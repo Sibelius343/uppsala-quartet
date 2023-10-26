@@ -16,7 +16,7 @@ const Layout = ({ children }: LayoutProps) => {
     flexDirection: 'column',
     justifyContent: 'start',
     alignItems: 'center',
-    minHeight: '100vh',
+    minHeight: 'calc(100vh - 100px)',
     backgroundColor: '#e5e5e5',
     pb: (mounted && window.location.pathname === "/") ? 0 : 5
   }

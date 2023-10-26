@@ -15,6 +15,8 @@ const Footer = () => {
   const router = useRouter();
   const [mounted, setMounted] = useState(false);
 
+  const onHomePage = router.pathname === "/";
+
   const handleLogout = () => {
     setLocalValue(false);
     setIsAdmin(false);
@@ -26,7 +28,7 @@ const Footer = () => {
   }, [])
 
   return (
-    <Box sx={{ display: 'flex', alignItems: "center", height: "100px", width: "100%", px: 2, backgroundColor: '#212121' }}>
+    <Box sx={{ display: 'flex', alignItems: "center", height: "100px", width: "100%", px: 2, backgroundColor: '#212121', top: onHomePage ? "100vh" : "", position: onHomePage ? "absolute" : "static" }}>
       <Box>
         <SocialButton icon={faFacebook} socialAddress="https://www.facebook.com/CatenaStringQuartet" />
         <SocialButton icon={faInstagram} socialAddress="https://www.instagram.com/catenastringquartet/"/>

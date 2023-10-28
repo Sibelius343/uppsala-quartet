@@ -18,7 +18,6 @@ const EventDetail = ({ id, title, date, location, description, imgUrl } : Perfor
   const [isEditEventOpen, setIsEditEventOpen] = useState(false);
   const { isAdmin } = useAdminContext();
   const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
-  const router = useRouter();
 
   useEffect(() => {
     setIsMounted(true);

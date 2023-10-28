@@ -50,6 +50,7 @@ const AboutQuartetCard = ({ id, picUri, text }: CardProps) => {
           <FontAwesomeIcon
             icon={faPencil}
             size="sm"
+            width={21}
           />
         </IconButton>}
         <Typography whiteSpace="pre-line">{text}</Typography>

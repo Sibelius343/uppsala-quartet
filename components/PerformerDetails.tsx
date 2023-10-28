@@ -47,6 +47,7 @@ const PerformerDetails = ({ id, name, instrument, bio, picUri }: Performer) => {
         <FontAwesomeIcon
           icon={faPencil}
           size="sm"
+          width={21}
         />
       </IconButton>}
       <Typography mt={{ xs: 2, sm: 0 }} whiteSpace="pre-line">{bio}</Typography>

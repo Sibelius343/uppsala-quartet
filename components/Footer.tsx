@@ -34,20 +34,18 @@ const Footer = () => {
         <SocialButton icon={faInstagram} socialAddress="https://www.instagram.com/catenastringquartet/"/>
         <SocialButton icon={faYoutube} socialAddress="https://www.youtube.com/@CatenaStringQuartet" />
       </Box>
-      <Box display="flex" flex={1} justifyContent="center" textAlign="start">
-        <Box>
+        <Box display="flex" flex={1} justifyContent="center" alignItems="center" flexDirection="column" textAlign="start">
           <Box display="flex" alignItems="center" mb={0.5}>
-            <Typography fontStyle="italic" color="grey.500" fontSize={{xs: 12, sm: 14 }} mr={0.5}>
+            <Typography component="div" display="flex" fontStyle="italic" color="grey.500" fontSize={{xs: 12, sm: 14 }} mr={0.5}>
               Photos by Caroline Ellingboe
+              <Box display="inline-flex" width="100%" flex={1} sx={{ flexWrap: "wrap" }}>
+                <SocialButton icon={faFacebook} socialAddress="https://www.facebook.com/ellingboephoto/" small />
+                <SocialButton icon={faInstagram} socialAddress="https://www.instagram.com/ellingboephoto/" small />
+              </Box>
             </Typography>
-            <Box display="flex" sx={{ flexWrap: "wrap" }}>
-              <SocialButton icon={faFacebook} socialAddress="https://www.facebook.com/ellingboephoto/" small />
-              <SocialButton icon={faInstagram} socialAddress="https://www.instagram.com/ellingboephoto/" small />
-            </Box>
           </Box>
           <Typography fontStyle="italic" color="grey.500" fontSize={{xs: 12, sm: 14 }}>Website by Sam Schoenwald</Typography>
         </Box>
-      </Box>
       <Box sx={{ display: 'flex', justifyContent: 'end', alignItems: "end" }}>
         {mounted && (isAdmin ?
         <Button

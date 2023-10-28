@@ -28,7 +28,7 @@ const Event: NextPage<EventPageProps> = ({ events }) => {
           <Button
             color="secondary"
             sx={{ alignSelf: "start"}}
-            startIcon={<FontAwesomeIcon icon={faArrowLeft} />}
+            startIcon={<FontAwesomeIcon icon={faArrowLeft} width={17.5} />}
           >
             Back to all events
           </Button>

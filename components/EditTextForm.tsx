@@ -22,9 +22,9 @@ const EditTextForm = ({ itemId, itemTitle, itemText, itemType, handleClose }: Ed
   const getApiPath = () => {
     switch (itemType) {
       case ItemEnum.Bio:
-        return 'api/editBio';
+        return '/api/editBio';
       case ItemEnum.AboutQuartet:
-        return 'api/editAboutQuartet';
+        return '/api/editAboutQuartet';
       default:
         return '/'
     }

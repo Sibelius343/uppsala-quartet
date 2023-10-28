@@ -76,6 +76,7 @@ const MediaVideoItem = ({ video: { videoId, videoTitle, videoDescription } }: Me
             <FontAwesomeIcon
               icon={faEllipsisVertical}
               size="sm"
+              width={5.25}
             />
           </IconButton>}
           <Menu

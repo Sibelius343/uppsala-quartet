@@ -8,7 +8,7 @@ import { useEffect, useState } from 'react';
 const Home: NextPage = () => {
   const theme = useTheme();
   const [mounted, setMounted] = useState(false);
-  const smallScreen = useMediaQuery(theme.breakpoints.down('md')) || (mounted && window.innerWidth / window.innerHeight > 1.1227);
+  const smallScreen = useMediaQuery(theme.breakpoints.down('md')) || (mounted && window.innerWidth / window.innerHeight < 1.1227);  
 
   const logoDimension = smallScreen ? 350 : 250;
 

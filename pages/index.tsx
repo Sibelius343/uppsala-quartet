@@ -3,18 +3,27 @@ import Head from 'next/head';
 import Image from 'next/legacy/image'; // using legacy because of some weird objectFit rendering behavior with the new Image component
 import styles from '../styles/Home.module.css';
 import { Box, useMediaQuery, useTheme } from '@mui/material';
-import { useEffect, useState } from 'react';
+import { useEffect, useLayoutEffect, useState } from 'react';
 
 const Home: NextPage = () => {
   const theme = useTheme();
   const [mounted, setMounted] = useState(false);
-  const smallScreen = useMediaQuery(theme.breakpoints.down('md')) || (mounted && window.innerWidth / window.innerHeight < 1.1227);  
+  const [aspectRatio, setAspectRatio] = useState<number>(2);
+  const smallScreen = useMediaQuery(theme.breakpoints.down('md')) || (mounted && aspectRatio < 1.1227);  
 
   const logoDimension = smallScreen ? 350 : 250;
 
   useEffect(() => {
     setMounted(true);
-  }, [])
+  }, []);
+
+  useEffect(() => {
+    const aspectRatioSetter = () => setAspectRatio(window.innerWidth / window.innerHeight);
+    if (mounted) {
+      window.addEventListener("resize", aspectRatioSetter);
+    }
+    return () => window.removeEventListener("resize", aspectRatioSetter);
+  }, [mounted])
 
   return (
     <>

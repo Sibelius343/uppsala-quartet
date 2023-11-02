@@ -1,4 +1,4 @@
-import { Box, Typography } from "@mui/material";
+import { Box, Typography, useMediaQuery, useTheme } from "@mui/material";
 import Image from "next/image";
 
 interface ImageHeaderProps {
@@ -26,10 +26,11 @@ const ImageHeader = ({ image, text }: ImageHeaderProps) => {
       />
       <Typography
         variant="h2"
+        fontSize={{ xs: "2.5rem", sm: "3.75rem" }}
         position="absolute"
         bottom={0}
         ml={"5vw"}
-        mb={6}
+        mb={{ xs: 4, sm: 6 }}
         color="white"
         sx={{ borderBottom: "2px solid white", whiteSpace: "pre-line" }}
         zIndex={5}

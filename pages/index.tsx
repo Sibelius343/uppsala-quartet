@@ -8,8 +8,8 @@ import { useEffect, useLayoutEffect, useState } from 'react';
 const Home: NextPage = () => {
   const theme = useTheme();
   const [mounted, setMounted] = useState(false);
-  const [aspectRatio, setAspectRatio] = useState<number>(mounted ? window.innerWidth / window.innerHeight : 2);
-  const smallScreen = useMediaQuery(theme.breakpoints.down('md')) || (mounted && aspectRatio < 1.1227);  
+  const [aspectRatio, setAspectRatio] = useState<number>();
+  const smallScreen = useMediaQuery(theme.breakpoints.down('md')) || (aspectRatio && aspectRatio < 1.1227);  
 
   const logoDimension = smallScreen ? 350 : 250;
 
@@ -20,10 +20,13 @@ const Home: NextPage = () => {
   useEffect(() => {
     const aspectRatioSetter = () => setAspectRatio(window.innerWidth / window.innerHeight);
     if (mounted) {
+      if (!aspectRatio) {
+        setAspectRatio(window.innerWidth / window.innerHeight);
+      }
       window.addEventListener("resize", aspectRatioSetter);
     }
     return () => window.removeEventListener("resize", aspectRatioSetter);
-  }, [mounted])
+  }, [mounted, aspectRatio]);
 
   return (
     <>

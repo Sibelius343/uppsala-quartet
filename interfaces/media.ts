@@ -49,4 +49,33 @@ export interface Video {
 
 export interface MediaObject {
   videos: Video[];
+  layout: LayoutItem[];
+}
+
+interface LayoutMediaItem {
+  id: string;
+  itemType: "MEDIA_ITEM";
+  mediaItemId: string;
+}
+
+export type NewLayoutMediaItem = Omit<LayoutMediaItem, "id">;
+
+export interface LayoutHeaderItem {
+  id: string;
+  itemType: "HEADER";
+  headerText: string;
+}
+
+export type NewLayoutHeaderItem = Omit<LayoutHeaderItem, "id">;
+
+export type LayoutItem = LayoutMediaItem | LayoutHeaderItem;
+
+export type NewLayoutItem = NewLayoutHeaderItem | NewLayoutMediaItem;
+
+export interface NewMediaLayout {
+  layout: NewLayoutItem[];
+}
+
+export interface MediaLayout {
+  layout: LayoutItem[];
 }

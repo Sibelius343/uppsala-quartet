@@ -1,10 +1,9 @@
 import { Button, Stack } from "@mui/material";
 import { Form, Formik } from "formik";
-import useNotificationContext from "../hooks/useNotificationContext";
-import { Video, YoutubeVideoItem } from "../interfaces/media";
+import { LayoutItem, Video, YoutubeVideoItem } from "../interfaces/media";
 import TextInput from "./FormikTextInput";
 import * as Yup from 'yup';
-import { useState } from "react";
+import { Dispatch, SetStateAction, useState } from "react";
 import VideoIdSearch from "./VideoIdSearch";
 
 const VideoValidationSchema: Yup.ObjectSchema<any> = Yup.object().shape({
@@ -18,6 +17,9 @@ interface VideoFormProps {
   videoEditId?: string;
   videoEditTitle?: string;
   videoEditDescription?: string;
+  setNewVideos: Dispatch<SetStateAction<Video[]>>;
+  setLayout?: Dispatch<SetStateAction<LayoutItem[]>>;
+  newItemIndex?: number;
 }
 
 interface VideoFormValues {
@@ -25,49 +27,33 @@ interface VideoFormValues {
   videoDescription: string;
 }
 
-const VideoForm = ({ handleClose, videoEditId, videoEditTitle = '', videoEditDescription = '' }: VideoFormProps) => {
+const VideoForm = ({ handleClose, videoEditId, videoEditTitle = '', videoEditDescription = '', setNewVideos, setLayout, newItemIndex }: VideoFormProps) => {
   const [video, setVideo] = useState<YoutubeVideoItem>();
-  const { setNotificationMessage } = useNotificationContext();
   const initialValues: VideoFormValues = {
     videoTitle: videoEditId ? videoEditTitle : video?.snippet.title || '',
     videoDescription: videoEditId ? videoEditDescription : video?.snippet.description || '',
   }  
 
-  const handleSubmit = async (values: VideoFormValues) => {
+  const handleSubmit = async (values: VideoFormValues) => {    
     if (videoEditId) {
       const editedVideo: Video = {
         videoId: videoEditId,
         ...values
       }
-
-      try {
-        await fetch('api/media', {
-          method: 'put',
-          body: JSON.stringify(editedVideo)
-        });
-        setNotificationMessage('Video updated successfully.')
-        handleClose();
-      } catch(e) {
-        setNotificationMessage('Error updating video.')
-        handleClose();
-      }
-    } else if (video) {
+      setNewVideos(state => ([...state, editedVideo]));
+      handleClose();
+    } else if (video && newItemIndex && setLayout) {
       const newVideo: Video = {
         videoId: video.id,
         ...values
       }
-      
-      try {
-        await fetch('api/media', {
-          method: 'post',
-          body: JSON.stringify(newVideo)
-        });
-        setNotificationMessage('Video added successfully.')
-        handleClose();
-      } catch(e) {
-        setNotificationMessage('Error adding video.')
-        handleClose();
-      }
+      setLayout(layout => {
+        const layoutClone = [...layout];
+        layoutClone.splice(newItemIndex, 0, { itemType: "MEDIA_ITEM", id: `tempId-${newVideo.videoId}`, mediaItemId: newVideo.videoId });
+        return layoutClone;
+      })
+      setNewVideos(state => ([...state, newVideo]));
+      handleClose();
     }
   }
 

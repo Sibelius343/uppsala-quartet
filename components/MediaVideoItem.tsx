@@ -1,17 +1,21 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Box, Dialog, DialogContent, DialogTitle, IconButton, Menu, MenuItem, Typography, useTheme } from "@mui/material";
-import { Video } from "../interfaces/media";
+import { LayoutItem, Video } from "../interfaces/media";
 import { faEllipsisVertical } from '@fortawesome/free-solid-svg-icons';
-import { useEffect, useState } from "react";
+import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import useAdminContext from "../hooks/useAdminContext";
 import VideoForm from "./VideoForm";
 import DeleteVideoDialog from "./DeleteVideoDialog";
 
 interface MediaVideoItemProps {
-  video: Video
+  video: Video;
+  setNewVideos: Dispatch<SetStateAction<Video[]>>;
+  isEditingMedia: boolean;
+  setDeletedVideoIds: Dispatch<SetStateAction<string[]>>;
+  setLayout: Dispatch<SetStateAction<LayoutItem[]>>;
 }
 
-const MediaVideoItem = ({ video: { videoId, videoTitle, videoDescription } }: MediaVideoItemProps) => {
+const MediaVideoItem = ({ video: { videoId, videoTitle, videoDescription }, setNewVideos, isEditingMedia, setDeletedVideoIds, setLayout }: MediaVideoItemProps) => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [isVideoEditOpen, setIsVideoEditOpen] = useState(false);
   const [isVideoDeleteOpen, setIsVideoDeleteOpen] = useState(false);
@@ -68,7 +72,7 @@ const MediaVideoItem = ({ video: { videoId, videoTitle, videoDescription } }: Me
           <Typography variant="h4" fontSize={28} textAlign={{ xs: "center", md: "start"}}>
             {videoTitle}
           </Typography>
-          {(isAdmin && isMounted) && 
+          {(isAdmin && isMounted && isEditingMedia) && 
           <IconButton
             onClick={handleOpenMenu}
             sx={{ alignSelf: 'start', width: 37 }}
@@ -106,6 +110,7 @@ const MediaVideoItem = ({ video: { videoId, videoTitle, videoDescription } }: Me
         <DialogContent>
           <VideoForm
             handleClose={() => setIsVideoEditOpen(false)}
+            setNewVideos={setNewVideos}
             videoEditId={videoId}
             videoEditTitle={videoTitle}
             videoEditDescription={videoDescription}
@@ -116,6 +121,8 @@ const MediaVideoItem = ({ video: { videoId, videoTitle, videoDescription } }: Me
         isVideoDeleteOpen={isVideoDeleteOpen}
         setIsVideoDeleteOpen={setIsVideoDeleteOpen}
         videoId={videoId}
+        setDeletedVideoIds={setDeletedVideoIds}
+        setLayout={setLayout}
       />
     </Box>
   )

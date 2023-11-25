@@ -1,25 +1,19 @@
 import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from "@mui/material";
 import { Dispatch, SetStateAction } from "react";
-import useNotificationContext from "../hooks/useNotificationContext";
+import { LayoutItem } from "../interfaces/media";
 
 interface DeleteVideoDialogProps {
   isVideoDeleteOpen: boolean;
   setIsVideoDeleteOpen: Dispatch<SetStateAction<boolean>>;
-  videoId: string
+  videoId: string;
+  setDeletedVideoIds: Dispatch<SetStateAction<string[]>>;
+  setLayout: Dispatch<SetStateAction<LayoutItem[]>>;
 }
 
-const DeleteVideoDialog = ({ isVideoDeleteOpen, setIsVideoDeleteOpen, videoId }: DeleteVideoDialogProps) => {
-  const { setNotificationMessage } = useNotificationContext();
-  const handleVideoDelete = async () => {
-    try {
-      await fetch(`/api/media`, {
-        method: 'DELETE',
-        body: JSON.stringify({ videoId })
-      });
-      setNotificationMessage('Video deleted successfully');
-    } catch (e: any) {
-      setNotificationMessage('Error deleting video');
-    }
+const DeleteVideoDialog = ({ isVideoDeleteOpen, setIsVideoDeleteOpen, videoId, setDeletedVideoIds, setLayout }: DeleteVideoDialogProps) => {
+  const handleVideoDelete = () => {
+    setDeletedVideoIds(state => ([...state, videoId]));
+    setLayout(state => ([...state.filter(item => (item.itemType === "HEADER" || item.mediaItemId !== videoId))]));
     setIsVideoDeleteOpen(false);
   }
 
@@ -33,12 +27,12 @@ const DeleteVideoDialog = ({ isVideoDeleteOpen, setIsVideoDeleteOpen, videoId }:
       <DialogTitle variant="h4">Delete Video?</DialogTitle>
       <DialogContent>
       <DialogContentText id="alert-dialog-description">
-        This cannot be undone.
+        Video will not be deleted until overall changes are saved.
       </DialogContentText>
     </DialogContent>
     <DialogActions>
       <Button onClick={() => setIsVideoDeleteOpen(false)}>Cancel</Button>
-      <Button onClick={handleVideoDelete} autoFocus>
+      <Button onClick={handleVideoDelete}>
         Confirm
       </Button>
     </DialogActions>

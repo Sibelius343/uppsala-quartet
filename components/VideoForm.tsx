@@ -40,7 +40,16 @@ const VideoForm = ({ handleClose, videoEditId, videoEditTitle = '', videoEditDes
         videoId: videoEditId,
         ...values
       }
-      setNewVideos(state => ([...state, editedVideo]));
+      setNewVideos(state => {
+        const stateClone = [...state];
+        const videoIndex = state.findIndex(v => v.videoId === videoEditId);
+        if (videoIndex > -1) {
+          stateClone.splice(videoIndex, 1, editedVideo)
+        } else {
+          stateClone.push(editedVideo)
+        }
+        return stateClone;
+      });
       handleClose();
     } else if (video && newItemIndex && setLayout) {
       const newVideo: Video = {

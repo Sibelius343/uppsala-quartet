@@ -67,7 +67,7 @@ const MediaHeaderItem = ({ headerText, index, isEditingMedia, setLayout }: Media
         }}
       >
         <MenuItem onClick={handleEditItemClick}>Edit</MenuItem>
-        <MenuItem onClick={handleDeleteItemClick} sx={{ color: "palette.error.main" }}>Delete</MenuItem>
+        <MenuItem onClick={handleDeleteItemClick} sx={{ color: "error.main" }}>Delete</MenuItem>
       </Menu>
       <Dialog
         open={isEditHeaderDialogOpen}

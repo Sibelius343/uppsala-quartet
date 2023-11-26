@@ -105,7 +105,7 @@ const MediaList = ({ layout, setLayout, setNewVideos, videos, isEditingMedia, se
                     </Box>}
                     {isEditingMedia &&
                     <IconButton onClick={(event) => handleOpenAddItemMenu(event, i + 1)}>
-                      <FontAwesomeIcon icon={faPlusCircle} />
+                      <FontAwesomeIcon icon={faPlusCircle} width={24} />
                     </IconButton>
                     }
                   </ListItem>

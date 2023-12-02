@@ -26,6 +26,7 @@ const AddEvent: NextPage = () => {
       </Head>
       {(isMounted && isAdmin) && 
       <Box width="85%">
+        <Box height="100px" width="100%" />
         <EventForm handleNavigate={handleNavigate} />
       </Box>
       }
